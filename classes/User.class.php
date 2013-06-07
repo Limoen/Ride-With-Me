@@ -1,7 +1,7 @@
 <?php
+session_start();
 	include_once("Db.class.php");
-	class User
-	{
+	class User {
 		private $m_sName;
 		private $m_sSurname;
 		private $m_sPhone;
@@ -14,134 +14,94 @@
 		private $m_sBio;
 		private $m_sBug_Image;
 		private $m_sBug_Name;
-	private $m_sNewName;
+		private $m_sNewName;
 		
-		public function __set($p_sProperty, $p_vValue)
-		{
-			switch($p_sProperty)
-			{
+		public function __set($p_sProperty, $p_vValue) {
+			switch($p_sProperty) {
 				case "Name":
-				if(!empty($p_vValue))
-				{
+				if(!empty($p_vValue)) {
 					$this->m_sName = $p_vValue;
-				}
-				else
-				{
-					throw new Exception("Ow! Give me your  name, please");
-					
+				} else {
+					throw new Exception("Please fill in your name");
 				}
 				break;
 				
 				case "Surname":
-				if(!empty($p_vValue))
-				{
+				if(!empty($p_vValue)) {
 					$this->m_sSurname = $p_vValue;
-				}
-				else
-				{
-					throw new Exception("Ow! Give me your surname, please");
-					
+				} else {
+					throw new Exception("Please fill in your surname");
 				}
 				break;
 				
 				case "Phone":
-				if(!empty($p_vValue))
-				{
+				if(!empty($p_vValue)) {
 					$this->m_sPhone = $p_vValue;
-				}
-				else
-				{
-					throw new Exception("Ow! Give me your phone number, please");
+				} else {
+					throw new Exception("Please fill in your phone number");
 				}
 				break;
 				
 				case "Email":
-				if(!empty($p_vValue))
-				{
+				if(!empty($p_vValue)) {
 					$this->m_sEmail = $p_vValue;
-				}
-				else
-				{
-					throw new Exception("Ow! Give me a correct email, please");
+				} else {
+					throw new Exception("Please fill in a correct e-mail address");
 				}
 				break;
 				
 				case "Password":
-				if(!empty($p_vValue))
-				{
+				if(!empty($p_vValue)) {
 					$this->m_sPassword = $p_vValue;
-				}
-				else
-				{
+				} else {
 					throw new Exception("Ow! Give me a correct password, sir");
-				
 				}
 				break;
 				
 				case "Country":
-				if(!empty($p_vValue))
-				{
+				if(!empty($p_vValue)) {
 					$this->m_sCountry = $p_vValue;
-				}
-				else
-				{
+				} else {
 					throw new Exception("Ow! Select a country, please");
-				
 				}
 				break;
 				
 				case "State":
-				if(!empty($p_vValue))
-				{
+				if(!empty($p_vValue)) {
 					$this->m_sState = $p_vValue;
-				}
-				else
-				{
+				} else {
 					throw new Exception("Ow! Select a state, please");
-				
 				}
 				break;
 				
 				case "City":
-				if(!empty($p_vValue))
-				{
+				if(!empty($p_vValue)) {
 					$this->m_sCity = $p_vValue;
-				}
-				else
-				{
+				} else {
 					throw new Exception("Ow! Select a city, please");
-				
 				}
 				break;
 				
 				case "Street":
-				
 					$this->m_sStreet = $p_vValue;
+					break;
 				
-				
-				break;
 				case "NewName":
-				
 					$this->m_sNewName = $p_vValue;
 					break;
 				
 				case "Bio":
-				if(!empty($p_vValue))
-				{
+				if(!empty($p_vValue)) {
 					$this->m_sBio = $p_vValue;
-				}
-				else
-				{
-					throw new Exception("Ow! Tell something more about your self, please");
-				
+				} else {
+					throw new Exception("Please tell us something about yourself");
 				}
 				break;
 			}
 		}
-		public function __get($p_sProperty)
-		{
-			switch($p_sProperty)
-			{
+		
+		public function __get($p_sProperty) {
+			switch($p_sProperty) {
 				case "Name":
 				return $this->m_sName;
 				break;
@@ -177,8 +137,8 @@
 				break;
 			}
 		}
-		public function Register()
-		{
+		
+		public function Register() {
 			$salt = "ab4p73wo5n3ig247xb1w9r";
 			$db = new Db();
 			$insert = "INSERT INTO users (
@@ -208,51 +168,60 @@
 					  )";
 			$select = "SELECT * FROM users WHERE name = '" . $db->mysqli->real_escape_string($this->Name) . "';";
 			$result = $db->mysqli->query($select);
-			if($result->num_rows == 0)
-			{
+			if($result->num_rows == 0) {
 				$db->mysqli->query($insert);
-				session_start();
 				$_SESSION["loggedin"] = true;
 				$_SESSION["name"] = $this->Name;
 				$_SESSION["surname"] = $this->Surname;
 				$_SESSION["profile_photo"] = $this->NewName;
 				header("Location: searchRides.php");
-			
-			}
-			else 
-			{
+			} else {
 				throw new Exception("Username already taken");
 			}
 		}
-		public function Login()
-		{
+		
+		public function Login() {
 			$salt = "ab4p73wo5n3ig247xb1w9r";
 			$db = new Db();
 			$select = "SELECT * FROM users WHERE name = '" . $db->mysqli->real_escape_string($this->Name) .
 					  "' AND password = '" . $db->mysqli->real_escape_string(md5($this->Password . $salt)) . "';";
 			$result = $db->mysqli->query($select);
-			if($result->num_rows == 1)
-			{
+			
+			//$userid = $result['user_id'];
+			
+			if($result->num_rows == 1) {
 				$_SESSION["loggedin"] = true;
 				$_SESSION["name"] = $this->Name;
 				$_SESSION["surname"] = $this->Surname;
 				$_SESSION["profile_photo"] = $this->NewName;
+				alert($this->user_id);
+				//$_SESSION["user_id"] = $userid;
 				header("Location: searchRides.php");
-			}
-			else
-			{
+			} else {
 				throw new Exception("Please enter correct username and password");
 			}
 		}
 		
-		public function getUserById($user_id)
-	{
-		$db = new Db();
-		$select = "SELECT * FROM users WHERE user_id=".$user_id.";";
-		
-		$result = $db->mysqli->query($select);
-		return $data=$result->fetch_assoc();
-	}
+		public function getUserById($user_id) {
+			$db = new Db();
+			$select = "SELECT * FROM users WHERE user_id=" . $user_id;
+			
+			$result = $db->mysqli->query($select);
+			return $data=$result->fetch_assoc();
+		}
+/*		
+		public function testGetUserById($user_id) {
+			$sSql = "SELECT * FROM tblUsers
+				WHERE user_id = " . $user_id;
+			$rResult = mysqli_query($link, $sSql);
+			if (!$rResult) {
+				throw new Exception("Could not get profile info");
+			} else {
+				return $rResult;
+			}
+			mysqli_close($link);
+		}
+*/
 	
 	}
 ?>

@@ -11,11 +11,11 @@
 	$page = end($url);
 	//echo $page;
 	
-?><div id="sidebar">
+?>
+<div id="sidebar">
 	<div data-theme="a" data-role="header">    
-        <h3>
+        <h3 onClick="window.location.reload()">
             Ride with.me
-       
         </h3>
         <header>
 			<nav id="mobile-bar"></nav>
@@ -24,11 +24,11 @@
 			
 				<ul>
 
-					<li data-role="list-divider" role="heading"  class="ui-li ui-li-divider  "><a  href="profile.php?" id="you" ><img style="width: 50px;" src="uploads/<?php echo $_SESSION["profile_photo"] ?> "/><?php echo " " . $_SESSION["name"] . " " . $_SESSION["surname"] ?></a></li>
-					<li><a <?php if($page == "searchRides.php"){echo 'class="active"';}?> href="searchRides.php" >&nbsp Search ride</a></li>
-					<li><a <?php if($page == "searchRides.php"){echo 'class="active"';}?> href="createRide.php">&nbsp Create ride</a></li>
-					<li><a <?php if($page == "searchRides.php"){echo 'class="active"';}?> href="yourRides.php">&nbsp Your rides</a></li>
-					<li><a <?php if($page == "searchRides.php"){echo 'class="active"';}?> href="settings.php"><img  src="img/Settings.png" img style="width: 15px;"/>&nbsp&nbspSettings</a></li>
+					<li data-role="list-divider" role="heading"  class="ui-li ui-li-divider  "><a  href="profile.php?user_id=<?php echo $_SESSION["user_id"] ?>" id="you" ><img style="width: 50px;" src="uploads/<?php echo $_SESSION["profile_photo"] ?> "/><?php echo " " . $_SESSION["name"] . " " . $_SESSION["surname"] ?></a></li>
+					<li><a <?php if($page == "searchRides.php"){echo 'class="active"';}?> href="searchRides.php" >&nbsp; Search ride</a></li>
+					<li><a <?php if($page == "searchRides.php"){echo 'class="active"';}?> href="createRide.php">&nbsp; Create ride</a></li>
+					<li><a <?php if($page == "searchRides.php"){echo 'class="active"';}?> href="yourRides.php">&nbsp; Your rides</a></li>
+					<li><a <?php if($page == "searchRides.php"){echo 'class="active"';}?> href="settings.php"><img  src="img/Settings.png" img style="width: 15px;"/>&nbsp; &nbsp; Settings</a></li>
 
 				</ul>
 			</nav>

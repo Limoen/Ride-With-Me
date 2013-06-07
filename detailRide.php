@@ -17,19 +17,18 @@ if (!isset($_SESSION["name"])) {
        <!-- onclick="location.href='javascript:history.go(-1)'"> -->
         <div data-role="page">
 
-			 <div data-theme="a" data-role="header"><?php
-		include_once("rwm_sidebar.php");
-	?>
-         <a data-role="button"  href="rwm_menu.php" data-icon="arrow-l"
-        data-iconpos="left" class="ui-btn-left">
-            back
-        </a>
-        <a data-role="button" href="#page1" data-icon="arrow-r" data-iconpos="right"
-        class="ui-btn-right">
-            submit
-        </a>
-      
-    </div>
+			<div data-theme="a" data-role="header">
+			<?php
+				include_once("sidebar.php");
+			?>
+            <a data-role="button"  href="rwm_menu.php" data-icon="arrow-l" data-iconpos="left" class="ui-btn-left">
+                back
+            </a>
+            <a data-role="button" href="#page1" data-icon="arrow-r" data-iconpos="right" class="ui-btn-right">
+                submit
+            </a>
+          
+    	</div>
 			<div data-role="content">
 			
 					 <div data-role="fieldcontain">

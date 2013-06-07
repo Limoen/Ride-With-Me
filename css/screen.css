@@ -271,21 +271,15 @@ label
 }
 
 #build-menu ul li a {
-	
-         color: #a0a8b5;
-            text-shadow: 0 1px 0 #000;
-         
-            text-decoration: none;
-           
+    color: #a0a8b5;
+    text-shadow: 0 1px 0 #000;     
+	text-decoration: none;
 }
 
 #build-menu ul li #you {
-	
-         color: #f6b205;
-            text-shadow: 0 1px 0 #000;
-		
-            text-decoration: none;
-           
+    color: #f6b205;
+    text-shadow: 0 1px 0 #000;
+	text-decoration: none;
 }
 
 
@@ -293,15 +287,14 @@ label
 	margin: 0 0 0px -40px;
 	width: 100%;
 	/*background-color:#2092CA;*/
-            padding: 10px;
-            border-top: 1px solid #4f576c;
-    		border-bottom: 1px solid #262d3e; }
-            text-shadow: 0 1px 0 #000;
-        
-            text-decoration: none;
-			box-shadow: 0 1px 0 rgba(64,64,64,.05) inset;
-            background: -webkit-linear-gradient(rgba(64,64,64,1) 0%, rgba(0,0,0,.1) 100%);
-            background: -moz-linear-gradient(rgba(49,49,49,.02) 0%, rgba(0,0,0,.1) 100%);
+	padding: 10px;
+	border-top: 1px solid #4f576c;
+	border-bottom: 1px solid #262d3e; 
+	text-shadow: 0 1px 0 #000;
+	text-decoration: none;
+	box-shadow: 0 1px 0 rgba(64,64,64,.05) inset;
+	background: -webkit-linear-gradient(rgba(64,64,64,1) 0%, rgba(0,0,0,.1) 100%);
+	background: -moz-linear-gradient(rgba(49,49,49,.02) 0%, rgba(0,0,0,.1) 100%);
 }
 
 #build-menu ul li img{
@@ -310,10 +303,15 @@ label
 }
 
 #build-menu ul li:hover, #build-menu ul li:focus, #build-menu ul li:active {
-	  background-color:  #474e61; }
-.ui-li
-{
-	 color: #f6b205;
+	background-color:  #474e61; 
+}
+  
+#build-menu-button {
+	z-index: 99999;
+}
+	  
+.ui-li {
+	color: #f6b205;
 	text-shadow: none;
 	font-family:helvetica;
 	font-style: normal;
@@ -321,17 +319,15 @@ label
 }
 
 #settings {
-
 	width: 17px;
 	height:17px;
 }
 
-#you
-{
-color:red;
+#you {
+	color:red;
 }
 
-#main-nav ul li a.active{
+#main-nav ul li a.active {
 	color:red;
 	font-weight:bold;
 	border-top:1px solid red;

@@ -29,7 +29,7 @@
 		</div>
 	<section id="login">
 		<h2>Want to take a ride? <span>Login</span></h2>
-		<form action="" method="post">
+		<form action="searchRides.php" method="post">
 		<input type="text" name="username" placeholder="Username" />
 		<input type="password" name="password" placeholder="Password" />
 		<div id="feedback">

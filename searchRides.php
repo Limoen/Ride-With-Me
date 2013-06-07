@@ -1,12 +1,13 @@
 <?php
 	include_once("logica.php");
 	
-?><!doctype html>
+?>
+<!doctype html>
 <html lang="en">
 <head>
 	<?php include_once("includes/head.php");?>
 	<script>
-	<?php include_once("includes/mobile_menu.js");?>
+		<?php include_once("includes/mobile_menu.js");?>
 	</script>
 </head>
 <body>
