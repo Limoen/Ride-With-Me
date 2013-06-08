@@ -74,6 +74,8 @@ $number = $ride->getRidesByName($username);
 
         <div><h3>FROM</h3><p><?php echo $details['ride_city'] . " (" . $details['ride_state'] . ", " . $details['ride_country']?>) </p><p><?php echo $details['ride_street'] . " " . $details['ride_streetnumber'] ?></p></div>
 		<div><h3>TO</h3><p><?php echo $details['ride_cityto'] . " (" . $details['ride_stateto'] . ", " . $details['ride_countryto']?>) </p><p><?php echo $details['ride_streetto'] . " " . $details['ride_streetnumberto'] ?></p></div>
+        
+        <iframe src="https://maps.google.be/maps?saddr=<?php echo $details['ride_street'] . "+" . $details['ride_streetnumber'] . "+" . $details['ride_city'] . "+" . $details['ride_country']?>&amp;daddr=<?php echo $details['ride_streetto'] . "+" . $details['ride_streetnumberto'] . "+" . $details['ride_cityto'] . "+" . $details['ride_countryto']?>&amp;output=embed" scrolling="no"></iframe>
 		<img src="img/car.png"/><?php echo $details['username'] ?>
 
 	</div>

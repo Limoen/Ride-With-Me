@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 	<?php include_once("includes/head.php");?>
-	<title><?php echo $username ?>' friend requests</title>
+	<title><?php echo $username ?>' rides</title>
 	<script>
 	<?php include_once("includes/mobile_menu.js");?>
 	</script>
@@ -40,18 +40,11 @@
 </div>
 	<div data-role="content">
 		
-			<h1>Friend requests</h1>
-			<div>
-				
-				<?php
+		<h1>Rides</h1>
+        <div>
+        
+        </div>
 			
-					foreach ($friendrequests as $request) {
-					
-						echo "<p>" . $request['friend_applicant'] .   " has send you a friend request"   . "<form><button type='submit' name='btnAccept_friendship' data-thema='be'>Accept</button><button type='submit' name='btnDecline_friendship' data-thema='be'>Decline</button></form></p><hr>";     
-					}
-				
-				 ?>
-			</div>
 	</div>
 </div>
 

@@ -97,7 +97,10 @@ if (isset($_POST["btnFriendRequest"])) {
     <div ><b><img  src="uploads/<?php echo $details['avatar']?>"/><br/><br/></br><p id="username"><?php echo $details['fullname'] . " (" . $details['username'] . ")" ?></p><br/><p><span>Birthday</span></p></b></div>
         <div><b><p id="slide2"><?php echo $details['bio']?></p></b></div>
 
-    <div><b><p id="slide3"><?php echo $details['street'] . ", " . $details['city'] . " (<span>" . $details['state'] . ", " . $details['country'] . ")</span>" ?></p><br/><p><span><?php echo $details['email'] . ", " . $details['phone'] ?></span></p></b></div>
+    <div>
+    	<b><p id="slide3"><?php echo $details['street'] . ", " . $details['city'] . " (<span>" . $details['state'] . ", " . $details['country'] . ")</span>" ?></p><br/><p><span><?php echo $details['email'] . ", " . $details['phone'] ?></span></p></b>
+        <iframe src="https://maps.google.be/maps?f=q&amp;source=s_q&amp;hl=nl&amp;geocode=&amp;q=<?php echo $details['street'] . '+' . $details['city'] . '+' . $details['country'] ?>&amp;output=embed"></iframe>
+    </div>
 	
   
 </div>
