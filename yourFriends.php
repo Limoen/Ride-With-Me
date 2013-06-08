@@ -1,25 +1,33 @@
 <?php
-	include_once("classes/User.class.php");
-	$user = new User();
-	session_start();
-	
-	$currentPage = $_SERVER['SCRIPT_NAME'];
+include_once("classes/User.class.php");
+include_once("classes/Friend.class.php");
+session_start();
+$friend = new Friend();
+$user = new User();
+
+$currentPage = $_SERVER['SCRIPT_NAME'];
 $url = explode("/", $currentPage);
 $page = end($url);
 
-$username = $_SESSION["username"];
-	$number = $user->getUserByName($username);
+	
+		$username = $_SESSION["username"];
+	
+		$number = $user->getUserByName($username);
+		//$id = $_GET['user_id'];
+	//$number1 = $friend->getFriendById($id);
+		$friends=$friend->GetAllYourFriends($username);
 ?><!doctype html>
 <html lang="en">
 <head>
 	<?php include_once("includes/head.php");?>
+	<title><?php echo $username ?>' friends</title>
 	<script>
 	<?php include_once("includes/mobile_menu.js");?>
 	</script>
 </head>
 <body>
 <div data-role="page">
-<div id="sidebar">
+	<div id="sidebar">
 	<div data-theme="a" data-role="header">    
         <h3>
             Ride with.me
@@ -32,6 +40,8 @@ $username = $_SESSION["username"];
 			
 				<ul>
 					<li><a id="you" href="profile.php?user_id=<?php echo $number ?>"><?php echo "Hello " . $username ?></a></li>
+				
+				
 					<li><a <?php if($page == "searchRides.php"){echo 'class="active"';}?> href="searchRides.php" >&nbsp Search ride</a></li>
 					<li><a <?php if($page == "createRide.php"){echo 'class="active"';}?> href="createRide.php">&nbsp Create ride</a></li>
 					<li><a <?php if($page == "yourRides.php"){echo 'class="active"';}?> href="yourRides.php">&nbsp Your rides</a></li>
@@ -44,20 +54,19 @@ $username = $_SESSION["username"];
 	</div>
 </div>
 	<div data-role="content">
-		<form>
-			<br />
-			<h1>Settings</h1>
-			<p class="lead">
-	
-    		Hello <span><?php echo $username . " "?></span><a href="logout.php">(Logout)</a>
-    		
-    		
-    		
-   	</p>
-		</form>
-		<FORM METHOD="LINK" ACTION="logout.php">
-<INPUT TYPE="submit" VALUE="Logout">
-</FORM>
+		
+			<h1>Your Friends</h1>
+			<div>
+				
+				<?php
+			
+					foreach ($friends as $friend) {
+					
+						echo "<a  href='profile.php?user_id=55'>" . $friend['friend_applicant'] . " <a/><p></p><hr>";     
+					}
+				
+				 ?>
+			</div>
 	</div>
 </div>
 

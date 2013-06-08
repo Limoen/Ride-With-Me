@@ -1,25 +1,50 @@
 <?php
-	include_once("classes/User.class.php");
-	$user = new User();
-	session_start();
-	
-	$currentPage = $_SERVER['SCRIPT_NAME'];
+include_once("classes/User.class.php");
+include_once("classes/Friend.class.php");
+session_start();
+$friend = new Friend();
+$user = new User();
+
+$currentPage = $_SERVER['SCRIPT_NAME'];
 $url = explode("/", $currentPage);
 $page = end($url);
 
-$username = $_SESSION["username"];
-	$number = $user->getUserByName($username);
+	//$id = $_GET['user_id'];	
+		$username = $_SESSION["username"];
+	
+		$number = $user->getUserByName($username);
+		$friendrequests=$friend->GetAllFriendRequests($username);
+		/*$friendstatus=$friend->GetAllFriendRequests($username, $applicant);
+		
+		if (isset($_POST["btnAccept_friendship"])) {
+	try {
+		$id = $_GET['user_id'];	
+		$applicant = $user->getUserName();
+		$friend -> AcceptFriendRequest($username, $applicant);
+		$feedback = "Awesome, You just added a friend!";
+		
+	
+	} catch(Exception $e) {
+		$feedback = $e -> getMessage();
+
+	}
+}
+		*/
+		
+		
+		
 ?><!doctype html>
 <html lang="en">
 <head>
 	<?php include_once("includes/head.php");?>
+	<title><?php echo $username ?>' friend requests</title>
 	<script>
 	<?php include_once("includes/mobile_menu.js");?>
 	</script>
 </head>
 <body>
 <div data-role="page">
-<div id="sidebar">
+	<div id="sidebar">
 	<div data-theme="a" data-role="header">    
         <h3>
             Ride with.me
@@ -32,6 +57,8 @@ $username = $_SESSION["username"];
 			
 				<ul>
 					<li><a id="you" href="profile.php?user_id=<?php echo $number ?>"><?php echo "Hello " . $username ?></a></li>
+				
+				
 					<li><a <?php if($page == "searchRides.php"){echo 'class="active"';}?> href="searchRides.php" >&nbsp Search ride</a></li>
 					<li><a <?php if($page == "createRide.php"){echo 'class="active"';}?> href="createRide.php">&nbsp Create ride</a></li>
 					<li><a <?php if($page == "yourRides.php"){echo 'class="active"';}?> href="yourRides.php">&nbsp Your rides</a></li>
@@ -44,20 +71,19 @@ $username = $_SESSION["username"];
 	</div>
 </div>
 	<div data-role="content">
-		<form>
-			<br />
-			<h1>Settings</h1>
-			<p class="lead">
-	
-    		Hello <span><?php echo $username . " "?></span><a href="logout.php">(Logout)</a>
-    		
-    		
-    		
-   	</p>
-		</form>
-		<FORM METHOD="LINK" ACTION="logout.php">
-<INPUT TYPE="submit" VALUE="Logout">
-</FORM>
+		
+			<h1>Friend requests</h1>
+			<div>
+				
+				<?php
+			
+					foreach ($friendrequests as $request) {
+					
+						echo "<p>" . $request['friend_applicant'] .   " has send you a friend request"   . "<form><button type='submit' name='btnAccept_friendship' data-thema='be'>Accept</button><button type='submit' name='btnDecline_friendship' data-thema='be'>Decline</button></form></p><hr>";     
+					}
+				
+				 ?>
+			</div>
 	</div>
 </div>
 

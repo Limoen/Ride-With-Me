@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 08, 2013 at 09:29 AM
+-- Generation Time: Jun 08, 2013 at 01:19 PM
 -- Server version: 5.5.20
 -- PHP Version: 5.3.10
 
@@ -32,6 +32,30 @@ CREATE TABLE IF NOT EXISTS `checkin` (
   `username` varchar(255) NOT NULL,
   PRIMARY KEY (`checkin_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `friends`
+--
+
+CREATE TABLE IF NOT EXISTS `friends` (
+  `friend_id` int(11) NOT NULL AUTO_INCREMENT,
+  `friend_applicant` varchar(255) NOT NULL,
+  `friend_recipient` varchar(255) NOT NULL,
+  `friend_status` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`friend_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `friends`
+--
+
+INSERT INTO `friends` (`friend_id`, `friend_applicant`, `friend_recipient`, `friend_status`, `user_id`) VALUES
+(1, 'd', 'Beirepoot', 'Accepted', 43),
+(3, 'ee', 'Beirepoot', 'Pending', 0),
+(4, 'dfd', 'Beirepoot', 'Pending', 0);
 
 -- --------------------------------------------------------
 

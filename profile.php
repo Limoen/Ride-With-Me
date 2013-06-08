@@ -1,5 +1,6 @@
 <?php
 include_once ("classes/User.class.php");
+include_once ("classes/Friend.class.php");
 session_start();
 
 $currentPage = $_SERVER['SCRIPT_NAME'];
@@ -11,10 +12,31 @@ if (!isset($_SESSION["username"])) {
 }
 
 $user = new User();
+$friend = new Friend();
 $id = $_GET['user_id'];
 $details = $user->getUserById($id);
 $username = $_SESSION["username"];
 $number = $user->getUserByName($username);
+
+if (isset($_POST["btnFriendRequest"])) {
+	try {
+		$username = $_SESSION['username'];
+		$user_id = $_GET['user_id'];
+		$buddy = $user->GetUserById($user_id);
+		$buddyName = $buddy['username'];
+		$friend->Friend_Applicant = $username;
+		$friend->Friend_Recipient = $buddyName;
+		$friend->Friend_Status = "Pending";
+		$friend->Saverequest();
+		$feedback = "Awesome, You send a request!";
+	
+	
+	} catch(Exception $e) {
+		$feedback = $e -> getMessage();
+
+	}
+}
+
 
 ?><!doctype html>
 <html lang="en">
@@ -58,6 +80,8 @@ $number = $user->getUserByName($username);
 					<li><a <?php if($page == "createRide.php"){echo 'class="active"';}?> href="createRide.php">&nbsp Create ride</a></li>
 					<li><a <?php if($page == "yourRides.php"){echo 'class="active"';}?> href="yourRides.php">&nbsp Your rides</a></li>
 					<li><a <?php if($page == "settings.php"){echo 'class="active"';}?> href="settings.php"><img  src="img/Settings.png" img style="width: 15px;"/>&nbsp&nbspSettings</a></li>
+					<li><a <?php if($page == "notifications.php"){echo 'class="active"';}?> href="notifications.php">&nbsp Notifications</a></li>
+					<li><a <?php if($page == "yourFriends.php"){echo 'class="active"';}?> href="yourFriends.php">&nbsp Your Friends</a></li>
 
 				</ul>
 			</nav>
@@ -83,8 +107,11 @@ $number = $user->getUserByName($username);
 <div id="saved">Saved about <span>$99,99</span> last month</div>
 
 </div>
+
 <div id="profile_links"><a href="#" ><img src="img/trips.png"/></a>
 <a href="#" ><img src="img/friends.png"/></a></div>
+<form class="form-horizontal" action="#"  method="post" >
+<button type="submit"  name="btnFriendRequest" data-theme="b" >Add as friend</button></form>
 
 		</div>
 	</body>
