@@ -35,6 +35,7 @@ if (isset($_POST["btnCreateRide"])) {
 ?><!doctype html>
 <html lang="en">
 	<head>
+		
 		<title>Create ride</title>
 		<?php
 		include_once ("includes/head.php");

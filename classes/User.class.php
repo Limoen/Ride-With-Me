@@ -262,6 +262,25 @@ while ($row=mysqli_fetch_assoc($result))
 return $row['user_id'];
 }
 }
+
+public function UsernameAvailable($p_username)
+	{
+		$db = new Db();
+		$sql = "SELECT * FROM users WHERE username = '" . $p_username . "'";
+		$result = $db->mysqli->query($sql);
+		
+		
+		// RECORDS TELLEN
+		$numberOfRecords = mysqli_num_rows($result);
+		if($numberOfRecords == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 	
 	}
 ?>

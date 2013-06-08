@@ -75,7 +75,9 @@ $user = new User();
 		</div>
 		
 		<form class="form-horizontal" id="account-form" action=""  method="post" enctype="multipart/form-data" data-ajax="false">
-		<input type="text" name="username" placeholder="User name" />
+		<input type="text" name="username" id="username" placeholder="User name" />
+		<div class="usernameFeedback"><span></span></div>
+		
 		<input type="text" name="fullname" placeholder="Full name" />
 		<input name="phone" id="textinput2" placeholder="Phone" value="" type="tel">
 		<input type="email" name="email" placeholder="Email" />
@@ -153,5 +155,6 @@ $user = new User();
 	</div>
 	</div>
 	</div>
+	<script src="js/app.js"></script>
 </body>
 </html>

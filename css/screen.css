@@ -460,5 +460,30 @@ font-size:1.2em;
 width:97%;
 }
 
+/* username check login */
 
+div.usernameFeedback
+{
+	display: none;
+	max-width: 270px;
+	margin-top:20px;
+	margin-bottom:20px;
+	
+}
+
+.ok
+{
+	background-color: #45e589;
+	color: white;
+	padding:10px;
+	font-size:1.2em;
+}
+
+.notok
+{
+	background-color: #ff5555;
+	color: white;
+	padding:10px;
+	font-size:1.2em;
+}
 

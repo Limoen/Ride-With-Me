@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 08, 2013 at 01:55 AM
+-- Generation Time: Jun 08, 2013 at 09:29 AM
 -- Server version: 5.5.20
 -- PHP Version: 5.3.10
 
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `rides` (
   `ride_streetto` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `ride_streetnumberto` int(11) NOT NULL,
   PRIMARY KEY (`ride_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=20 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `rides`
@@ -78,7 +78,9 @@ INSERT INTO `rides` (`ride_id`, `username`, `ride_country`, `ride_state`, `ride_
 (16, 'King', 'Belgium', 'East-Flanders', 'Dendermonde', 'Leeuwerikenlaan', 1, '', '', '', '', 0),
 (17, 'King', 'Belgium', 'East-Flanders', 'Dendermonde', 'Leeuwerikenlaan', 1, '', '', '', '', 0),
 (18, 'King', 'Belgium', 'East-Flanders', 'Dendermonde', 'Leeuwerikenlaan', 1, '', '', '', '', 0),
-(19, 'King', 'Belgium', 'East-Flanders', 'Dendermonde', 'Leeuwerikenlaan', 87, 'Brazilië', 'Rio de Janeiro', 'Rio de Janeiro', 'Rua de Cuba Libre', 137);
+(19, 'King', 'Belgium', 'East-Flanders', 'Dendermonde', 'Leeuwerikenlaan', 87, 'Brazilië', 'Rio de Janeiro', 'Rio de Janeiro', 'Rua de Cuba Libre', 137),
+(20, 'Beirepoot', 'Belgium', 'East-Flanders', 'Dendermonde', 'Leeuwerikenlaan', 1, 'Belgium', 'East-Flanders', 'Dendermonde', 'Leeuwerikenlaan', 1),
+(21, 'Beirepoot', 'Belgium', 'East-Flanders', 'Dendermonde', 'Leeuwerikenlaan', 1, 'Belgium', 'East-Flanders', 'Dendermonde', 'Leeuwerikenlaan', 1);
 
 -- --------------------------------------------------------
 
@@ -100,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `avatar` varchar(255) COLLATE utf8_bin NOT NULL,
   `bio` varchar(500) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=53 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=54 ;
 
 --
 -- Dumping data for table `users`
@@ -125,7 +127,8 @@ INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `fullname`, `ph
 (49, 'sdfze', 'd@d.com', '56d01eb675ff3b3229ebc0ff2d3969fa', 'Marnix Verhulst', 'dd', 'Belgium', 'East Flanders', 'Dendermonde', 'ddd', '1370618930', 'd'),
 (50, 'beirepoot', 'd@d.com', '56d01eb675ff3b3229ebc0ff2d3969fa', 'Marnix Verhulst', 'dddd', 'Belgium', 'East Flanders', 'Dendermonde', 'd', '136967416029b0ad94af6911e281cb22000a1f9a0a_7.jpg', 'Hello i''m dickhead'),
 (51, 'e', 'edz@hot.com', 'c4e041275919253c63cde8f55b9b15e1', 'e', 'ee', 'Belgium', 'East Flanders', 'Dendermonde', 'e', '1370646687', 'e'),
-(52, 'King', 'marnix.verhulst@gmail.com', '2a57b44131ce9133bff0fb0bd6b30700', 'Marnix Verhulst', '0393939', 'Belgium', 'East Flanders', 'Dendermonde', 'King street', '1370646906', 'King');
+(52, 'King', 'marnix.verhulst@gmail.com', '2a57b44131ce9133bff0fb0bd6b30700', 'Marnix Verhulst', '0393939', 'Belgium', 'East Flanders', 'Dendermonde', 'King street', '1370646906', 'King'),
+(53, 'Beirepoot', 'marnix.verhulst@gmail.com', '2a893ad87ccae0892ec11fa054eac76c', 'Marnix Verhulst', 'ddddd', 'Belgium', 'East Flanders', 'Dendermonde', 'd', '1370683198', 'd');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
