@@ -1,5 +1,6 @@
 <?php
 // logout session op false zetten om uit te loggen en terug te keren naar het startscherm
-	$_SESSION["loggedin"] = false;
+	session_start();
+	session_destroy();
 	header("Location: index.php");
 ?>

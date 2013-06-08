@@ -48,16 +48,10 @@ $username = $_SESSION["username"];
 			<br />
 			<h1>Settings</h1>
 			<p class="lead">
-	
-    		Hello <span><?php echo $username . " "?></span><a href="logout.php">(Logout)</a>
-    		
-    		
-    		
-   	</p>
+    			Hello <span><?php echo $username . " "?></span><a href="logout.php">(Logout)</a>
+    		</p>
 		</form>
-		<FORM METHOD="LINK" ACTION="logout.php">
-<INPUT TYPE="submit" VALUE="Logout">
-</FORM>
+		<a data-role="button" data-theme="e" href="logout.php">log out</a>
 	</div>
 </div>
 
