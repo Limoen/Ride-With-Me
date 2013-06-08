@@ -1,6 +1,24 @@
 <?php
-	include_once("logica.php");
+	include_once("classes/User.class.php");
+	session_start();
+	$_SESSION["loggedin"] = false;
+	$feedback = "";
 	
+	$user = new User();
+		if(!empty($_POST["btnLogin"]))
+	{
+		try
+		{
+			$user = new User();
+			$user->Username = $_POST["username"];
+			$user->Password = $_POST["password"];
+			$user->Login();
+		}
+		catch(Exception $e)
+		{
+			$feedback = $e->getMessage();
+		}
+	}
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -30,7 +48,7 @@
 	<section id="login">
 		<h2>Want to take a ride? <span>Login</span></h2>
 		<form action="searchRides.php" method="post">
-		<input type="text" name="username" placeholder="Username" />
+		<input type="text" name="username" placeholder="username" />
 		<input type="password" name="password" placeholder="Password" />
 		<div id="feedback">
 		<?php if(empty($feedback)) { ?>

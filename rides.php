@@ -1,5 +1,6 @@
 <?php
 include_once ("classes/User.class.php");
+include_once ("classes/Ride.class.php");
 session_start();
 
 $currentPage = $_SERVER['SCRIPT_NAME'];
@@ -11,14 +12,17 @@ if (!isset($_SESSION["username"])) {
 }
 
 $user = new User();
-$id = $_GET['user_id'];
-$details = $user->getUserById($id);
+$ride = new Ride();
+$id = $_GET['ride_id'];
+$details = $ride->getRideById($id);
 $username = $_SESSION["username"];
-$number = $user->getUserByName($username);
-
+	//$id = $_GET['user_id'];	
+$number = $ride->getRidesByName($username);
+//$nameTo = $details['name'];
 ?><!doctype html>
 <html lang="en">
 	<head>
+		<title><?php echo $details['ride_city'] . " - " . $details['ride_cityto']?></title>
 		<?php include_once("includes/head.php");?>
 		<script src="js/jquery.mobile-menu.js"></script>
 	
@@ -39,7 +43,7 @@ $number = $user->getUserByName($username);
        <!-- onclick="location.href='javascript:history.go(-1)'"> -->
         <div data-role="page">
 
-			 <div data-theme="a" data-role="header"><div id="sidebar">
+			<div id="sidebar">
 	<div data-theme="a" data-role="header">    
         <h3>
             Ride with.me
@@ -63,30 +67,18 @@ $number = $user->getUserByName($username);
 			</nav>
 		</header>
 	</div>
-</div>
-        
-       
-      
+
     </div>
-    
-<div id='mySwipe'  class='swipe'>
-  <div class='swipe-wrap'>
-    <div ><b><img  src="uploads/<?php echo $details['avatar']?>"/><br/><br/></br><p id="username"><?php echo $details['fullname'] . " (" . $details['username'] . ")" ?></p><br/><p><span>Birthday</span></p></b></div>
-        <div><b><p id="slide2"><?php echo $details['bio']?></p></b></div>
+    <div data-role="content">
 
-    <div><b><p id="slide3"><?php echo $details['street'] . ", " . $details['city'] . " (<span>" . $details['state'] . ", " . $details['country'] . ")</span>" ?></p><br/><p><span><?php echo $details['email'] . ", " . $details['phone'] ?></span></p></b></div>
-	
-  
-</div>
-<div onclick='mySwipe.prev()' id="left"></div>
-<div onclick='mySwipe.next()' id="right"></div>
-<div id="saved">Saved about <span>$99,99</span> last month</div>
-
-</div>
-<div id="profile_links"><a href="#" ><img src="img/trips.png"/></a>
-<a href="#" ><img src="img/friends.png"/></a></div>
-
-		</div>
+        <div><h3>FROM</h3><p><?php echo $details['ride_city'] . " (" . $details['ride_state'] . ", " . $details['ride_country']?>) </p><p><?php echo $details['ride_street'] . " " . $details['ride_streetnumber'] ?></p></div>
+		<div><h3>TO</h3><p><?php echo $details['ride_cityto'] . " (" . $details['ride_stateto'] . ", " . $details['ride_countryto']?>) </p><p><?php echo $details['ride_streetto'] . " " . $details['ride_streetnumberto'] ?></p></div>
+		<img src="img/car.png"/><?php echo $details['username'] ?>
+<button type="submit"  name="btnCheckIn" data-theme="b" >
+						
+				Check in
+			</button>
+	</div>
 	</body>
 
 <script src='js/swipe.js'></script>

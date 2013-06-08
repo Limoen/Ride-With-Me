@@ -1,22 +1,68 @@
 <?php
-	include_once("logica.php");
+include_once("classes/User.class.php");
+include_once("classes/Ride.class.php");
+session_start();
+$ride = new Ride();
+$user = new User();
+
+$currentPage = $_SERVER['SCRIPT_NAME'];
+$url = explode("/", $currentPage);
+$page = end($url);
+	//$id = $_GET['user_id'];	
+		$username = $_SESSION["username"];
 	
+		$number = $user->getUserByName($username);
+		$rides=$ride->GetAllYourRides($username);
 ?><!doctype html>
 <html lang="en">
 <head>
 	<?php include_once("includes/head.php");?>
+	<title><?php echo $username ?>' rides</title>
+	<script>
+	<?php include_once("includes/mobile_menu.js");?>
+	</script>
 </head>
 <body>
 <div data-role="page">
-	<?php
-		include_once("sidebar.php");
-	?>
+	<div id="sidebar">
+	<div data-theme="a" data-role="header">    
+        <h3>
+            Ride with.me
+       
+        </h3>
+        <header>
+			<nav id="mobile-bar"></nav>
+				
+			<nav id="main-nav">
+			
+				<ul>
+					<li><a id="you" href="profile.php?user_id=<?php echo $number ?>"><?php echo "Hello " . $username ?></a></li>
+				
+				
+					<li><a <?php if($page == "searchRides.php"){echo 'class="active"';}?> href="searchRides.php" >&nbsp Search ride</a></li>
+					<li><a <?php if($page == "createRide.php"){echo 'class="active"';}?> href="createRide.php">&nbsp Create ride</a></li>
+					<li><a <?php if($page == "yourRides.php"){echo 'class="active"';}?> href="yourRides.php">&nbsp Your rides</a></li>
+					<li><a <?php if($page == "settings.php"){echo 'class="active"';}?> href="settings.php"><img  src="img/Settings.png" img style="width: 15px;"/>&nbsp&nbspSettings</a></li>
+
+				</ul>
+			</nav>
+		</header>
+	</div>
+</div>
 	<div data-role="content">
-		<form>
-			<br />
-			<h1>Your rides</h1>
-			<a data-role="button"  href="#" data-theme="b" >Your rides<br/>TAP</a><br />
-		</form>
+		
+			<h1>Your Rides</h1>
+			<div>
+				<h1>From</h1>
+				<?php
+			
+					foreach ($rides as $ride) {
+					
+						echo "<a  href='rides.php?ride_id=" . $ride['ride_id'] . "'>More <a/><p>" . $ride['ride_city'] . " (" . $ride['ride_country'] . ") - " . $ride['ride_cityto'] . " (" . $ride['ride_countryto'] . ")" . "<br>From: " . $ride['ride_street'] . " " . $ride['ride_streetnumber'] . "<br>To: " . $ride['ride_streetto'] . " " . $ride['ride_streetnumberto'] . "</p><hr>";     
+					}
+				
+				 ?>
+			</div>
 	</div>
 </div>
 
