@@ -223,6 +223,8 @@
 				throw new Exception("Username already taken");
 			}
 		}
+		
+		
 		public function Login()
 		{
 			$salt = "ab4p73wo5n3ig247xb1w9r";
@@ -252,35 +254,34 @@
 		return $data=$result->fetch_assoc();
 	}
 	
-	public function getUserByName($username)
-{
-$db = new Db();
-$select = "SELECT user_id FROM users WHERE username = '" . $_SESSION["username"] . "';";
-$result = $db->mysqli->query($select);
-while ($row=mysqli_fetch_assoc($result))
-{
-return $row['user_id'];
-}
-}
-
-public function UsernameAvailable($p_username)
-	{
+	public function getUserByName($username) {
 		$db = new Db();
-		$sql = "SELECT * FROM users WHERE username = '" . $p_username . "'";
-		$result = $db->mysqli->query($sql);
+		$select = "SELECT user_id FROM users WHERE username = '" . $_SESSION["username"] . "';";
+		$result = $db->mysqli->query($select);
 		
-		
-		// RECORDS TELLEN
-		$numberOfRecords = mysqli_num_rows($result);
-		if($numberOfRecords == 0)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
+		while ($row=mysqli_fetch_assoc($result)) {
+			return $row['user_id'];
 		}
 	}
+
+	public function UsernameAvailable($p_username)
+		{
+			$db = new Db();
+			$sql = "SELECT * FROM users WHERE username = '" . $p_username . "'";
+			$result = $db->mysqli->query($sql);
+			
+			
+			// RECORDS TELLEN
+			$numberOfRecords = mysqli_num_rows($result);
+			if($numberOfRecords == 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	
 	}
 ?>

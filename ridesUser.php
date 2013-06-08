@@ -1,35 +1,5 @@
 <?php
-include_once("classes/User.class.php");
-include_once("classes/Friend.class.php");
-session_start();
-$friend = new Friend();
-$user = new User();
 
-$currentPage = $_SERVER['SCRIPT_NAME'];
-$url = explode("/", $currentPage);
-$page = end($url);
-
-	//$id = $_GET['user_id'];	
-		$username = $_SESSION["username"];
-	
-		$number = $user->getUserByName($username);
-		$friendrequests=$friend->GetAllFriendRequests($username);
-		/*$friendstatus=$friend->GetAllFriendRequests($username, $applicant);
-		
-		if (isset($_POST["btnAccept_friendship"])) {
-	try {
-		$id = $_GET['user_id'];	
-		$applicant = $user->getUserName();
-		$friend -> AcceptFriendRequest($username, $applicant);
-		$feedback = "Awesome, You just added a friend!";
-		
-	
-	} catch(Exception $e) {
-		$feedback = $e -> getMessage();
-
-	}
-}
-		*/	
 ?>
 <!doctype html>
 <html lang="en">

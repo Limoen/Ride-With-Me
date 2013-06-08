@@ -14,13 +14,12 @@
 				<img src="img/logo_RWM.png"  alt="logo ride with.me">
 			</div>
 			<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
-					<h2>Join Us</h2>
-					<!-- vorige pagina:  onClick="location.href='../'" -->
-					<a data-role="button" data-theme="b" href="">login with facebook</a>
-					<h2>Or take the authentic way</h2>
-					<a data-role="button" data-theme="e" href="login.php">  login</a>
-					<a data-role="button" data-theme="e" href="register.php">Create an account</a>
-	
+                <h2>Join Us</h2>
+                <!-- vorige pagina:  onClick="location.href='../'" -->
+                <a data-role="button" data-theme="b" href="">login with facebook</a>
+                <h2>Or take the authentic way</h2>
+                <a data-role="button" data-theme="e" href="login.php">  login</a>
+                <a data-role="button" data-theme="e" href="register.php">Create an account</a>
 			</form>
 
 		</div>

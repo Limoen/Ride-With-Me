@@ -1,110 +1,112 @@
 <?php
 include_once ("Db.class.php");
 class Ride {
-		private $m_sRide_Country;
-		private $m_sRide_State;
-		private $m_sRide_City;
-		private $m_sRide_Street;
-		private $m_iRide_StreetNumber;
-		private $m_sRide_CountryTo;
-		private $m_sRide_StateTo;
-		private $m_sRide_CityTo;
-		private $m_sRide_StreetTo;
-		private $m_iRide_StreetNumberTo;
+	private $m_sRide_Date;
+	private $m_sRide_Time;
+	private $m_sRide_Country;
+	private $m_sRide_State;
+	private $m_sRide_City;
+	private $m_sRide_Street;
+	private $m_iRide_StreetNumber;
+	private $m_sRide_CountryTo;
+	private $m_sRide_StateTo;
+	private $m_sRide_CityTo;
+	private $m_sRide_StreetTo;
+	private $m_iRide_StreetNumberTo;
 
 	public function __set($p_sProperty, $p_vValue) {
 		switch($p_sProperty) {
+			case "Ride_Date" :
+			$this -> m_sRide_Date = $p_vValue;
+			break;
+			
+			case "Ride_Time" :
+			$this -> m_sRide_Time = $p_vValue;
+			break;
+			
 			case "Ride_Country" :
-					$this -> m_sRide_Country = $p_vValue;
-				
-				break;
+			$this -> m_sRide_Country = $p_vValue;
+			break;
+			
 			case "Ride_State" :
-					$this -> m_sRide_State = $p_vValue;
-				
-				break;
+			$this -> m_sRide_State = $p_vValue;
+			break;
 				
 			case "Ride_City" :
-					$this -> m_sRide_City = $p_vValue;
-				
-				break;	
+			$this -> m_sRide_City = $p_vValue;
+			break;	
 		
 			case "Ride_Street" :
-					$this -> m_sRide_Street = $p_vValue;
-				
-				break;	
+			$this -> m_sRide_Street = $p_vValue;
+			break;	
 				
 			case "Ride_StreetNumber" :
-					$this -> m_iRide_StreetNumber = $p_vValue;
+			$this -> m_iRide_StreetNumber = $p_vValue;
+			break;			
 				
-				break;			
-				
-				case "Ride_CountryTo" :
-					$this -> m_sRide_CountryTo = $p_vValue;
-				
-				break;
+			case "Ride_CountryTo" :
+			$this -> m_sRide_CountryTo = $p_vValue;
+			break;
+			
 			case "Ride_StateTo" :
-					$this -> m_sRide_StateTo = $p_vValue;
-				
-				break;
+			$this -> m_sRide_StateTo = $p_vValue;
+			break;
 				
 			case "Ride_CityTo" :
-					$this -> m_sRide_CityTo = $p_vValue;
-				
-				break;	
+			$this -> m_sRide_CityTo = $p_vValue;
+			break;	
 		
 			case "Ride_StreetTo" :
-					$this -> m_sRide_StreetTo = $p_vValue;
-				
-				break;	
+			$this -> m_sRide_StreetTo = $p_vValue;
+			break;	
 				
 			case "Ride_StreetNumberTo" :
-					$this -> m_iRide_StreetNumberTo = $p_vValue;
-				
-				break;	
+			$this -> m_iRide_StreetNumberTo = $p_vValue;
+			break;	
 		}
 	}
 
 	public function __get($p_sProperty) {
 		switch($p_sProperty) {
-			case "Ride_Country" :
-				return $this -> m_sRide_Country;
-				break;
+			case "Ride_Date" :
+			return $this -> m_sRide_Country;
+			break;
+			
+			case "Ride_Time" :
+			return $this -> m_sRide_State;
+			break;
+			
+			case "Ride_City" :
+			return $this -> m_sRide_City;
+			break;
+			
+			case "Ride_Street" :
+			return $this -> m_sRide_Street;
+			break;
+			
+			case "Ride_StreetNumber" :
+			return $this -> m_iRide_StreetNumber;
+			break;
+			
+			case "Ride_CountryTo" :
+			return $this -> m_sRide_CountryTo;
+			break;
 
-				case "Ride_State" :
-				return $this -> m_sRide_State;
-				break;
-				
-				case "Ride_City" :
-				return $this -> m_sRide_City;
-				break;
-				
-				case "Ride_Street" :
-				return $this -> m_sRide_Street;
-				break;
-				
-				case "Ride_StreetNumber" :
-				return $this -> m_iRide_StreetNumber;
-				break;
-				
-				case "Ride_CountryTo" :
-				return $this -> m_sRide_CountryTo;
-				break;
-
-				case "Ride_StateTo" :
-				return $this -> m_sRide_StateTo;
-				break;
-				
-				case "Ride_CityTo" :
-				return $this -> m_sRide_CityTo;
-				break;
-				
-				case "Ride_StreetTo" :
-				return $this -> m_sRide_StreetTo;
-				break;
-				
-				case "Ride_StreetNumberTo" :
-				return $this -> m_iRide_StreetNumberTo;
-				break;
+			case "Ride_StateTo" :
+			return $this -> m_sRide_StateTo;
+			break;
+			
+			case "Ride_CityTo" :
+			return $this -> m_sRide_CityTo;
+			break;
+			
+			case "Ride_StreetTo" :
+			return $this -> m_sRide_StreetTo;
+			break;
+			
+			case "Ride_StreetNumberTo" :
+			return $this -> m_iRide_StreetNumberTo;
+			break;
 	
 		}
 
@@ -115,6 +117,8 @@ class Ride {
 
 		$db = new Db();
 		$insert = "INSERT INTO rides (
+								ride_date,
+								ride_time,
 								ride_country,
 								ride_state,
 								ride_city,
@@ -128,8 +132,9 @@ class Ride {
 								username
 								
 					
-						  ) VALUES (
-						  		
+					) VALUES (
+						  		'" . $db -> mysqli -> real_escape_string($this -> Ride_Date) . "',
+								'" . $db -> mysqli -> real_escape_string($this -> Ride_Time) . "',
 						  		'" . $db -> mysqli -> real_escape_string($this -> Ride_Country) . "',
 						  		'" . $db -> mysqli -> real_escape_string($this -> Ride_State) . "',
 						  		'" . $db -> mysqli -> real_escape_string($this -> Ride_City) . "',
@@ -147,19 +152,16 @@ class Ride {
 
 	}
 	
-	public function getRidesByName($username)
-{
-$db = new Db();
-$select = "SELECT ride_id FROM rides WHERE username = '" . $_SESSION["username"] . "';";
-$result = $db->mysqli->query($select);
-while ($row=mysqli_fetch_assoc($result))
-{
-return $row['ride_id'];
-}
-}
+	public function getRidesByName($username) {
+		$db = new Db();
+		$select = "SELECT ride_id FROM rides WHERE username = '" . $_SESSION["username"] . "';";
+		$result = $db->mysqli->query($select);
+		while ($row=mysqli_fetch_assoc($result)) {
+			return $row['ride_id'];
+		}
+	}
 
-	public function getRideById($ride_id)
-	{
+	public function getRideById($ride_id) {
 		$db = new Db();
 		$select = "SELECT * FROM rides WHERE ride_id=".$ride_id.";";
 		
@@ -195,8 +197,8 @@ return $row['ride_id'];
              $result_array[]=$row;                                                                                          
 		}
 		return $result_array;
-		
 	}
+	
 	/*
 	public function GetAllRidesByUsername() {
 		$db = new Db();

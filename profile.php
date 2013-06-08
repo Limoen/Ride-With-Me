@@ -1,7 +1,7 @@
 <?php
+session_start();
 include_once ("classes/User.class.php");
 include_once ("classes/Friend.class.php");
-session_start();
 
 $currentPage = $_SERVER['SCRIPT_NAME'];
 $url = explode("/", $currentPage);
@@ -28,7 +28,7 @@ if (isset($_POST["btnFriendRequest"])) {
 		$friend->Friend_Recipient = $buddyName;
 		$friend->Friend_Status = "Pending";
 		$friend->Saverequest();
-		$feedback = "Awesome, You send a request!";
+		$feedback = "Awesome, You've sent a friend request!";
 	
 	
 	} catch(Exception $e) {
@@ -36,9 +36,8 @@ if (isset($_POST["btnFriendRequest"])) {
 
 	}
 }
-
-
-?><!doctype html>
+?>
+<!doctype html>
 <html lang="en">
 	<head>
 		<?php include_once("includes/head.php");?>
@@ -108,8 +107,10 @@ if (isset($_POST["btnFriendRequest"])) {
 
 </div>
 
-<div id="profile_links"><a href="#" ><img src="img/trips.png"/></a>
-<a href="#" ><img src="img/friends.png"/></a></div>
+<div id="profile_links">
+	<a href="ridesUser.php" ><img src="img/trips.png"/></a>
+	<a href="friendsUser.php"><img src="img/friends.png"/></a>
+</div>
 <form class="form-horizontal" action="#"  method="post" >
 <button type="submit"  name="btnFriendRequest" data-theme="b" >Add as friend</button></form>
 

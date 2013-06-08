@@ -1,8 +1,7 @@
 <?php
 include_once ("logica.php");
 if (!isset($_SESSION["name"])) {
-
-	header("Location: rwm_view.php");
+	header("Location: index.php");
 }
 ?><!doctype html>
 <html lang="en">
