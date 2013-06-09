@@ -59,13 +59,12 @@ $page = end($url);
 			<div>
 				
 				<?php
-			
-					foreach ($friends as $friend) {
-					
-						echo "<a  href='profile.php?user_id=55'>" . $friend['friend_applicant'] . " <a/><p></p><hr>";     
-					}
-				
-				 ?>
+
+foreach ($friends as $friend) {
+echo "<a href='profile.php?user_id=".$friend['user_id']."'>" . $friend['friend_applicant'] . " <a/><p></p><hr>"; 
+}
+
+?>
 			</div>
 	</div>
 </div>

@@ -2,6 +2,9 @@
 include_once("classes/User.class.php");
 include_once("classes/Friend.class.php");
 session_start();
+if (!isset($_SESSION["username"])) {
+	header("Location: index.php");
+}
 $friend = new Friend();
 $user = new User();
 
@@ -55,13 +58,12 @@ $page = end($url);
 			
 				<ul>
 					<li><a id="you" href="profile.php?user_id=<?php echo $number ?>"><?php echo "Hello " . $username ?></a></li>
-				
-				
 					<li><a <?php if($page == "searchRides.php"){echo 'class="active"';}?> href="searchRides.php" >&nbsp Search ride</a></li>
 					<li><a <?php if($page == "createRide.php"){echo 'class="active"';}?> href="createRide.php">&nbsp Create ride</a></li>
 					<li><a <?php if($page == "yourRides.php"){echo 'class="active"';}?> href="yourRides.php">&nbsp Your rides</a></li>
-					<li><a <?php if($page == "settings.php"){echo 'class="active"';}?> href="settings.php"><img  src="img/Settings.png" img style="width: 15px;"/>&nbsp&nbspSettings</a></li>
+					<li><a <?php if($page == "yourFriends.php"){echo 'class="active"';}?> href="yourFriends.php">&nbsp Your Friends</a></li>
 					<li><a <?php if($page == "notifications.php"){echo 'class="active"';}?> href="notifications.php">&nbsp Notifications</a></li>
+					<li><a <?php if($page == "settings.php"){echo 'class="active"';}?> href="settings.php"><img  src="img/Settings.png" img style="width: 15px;"/>&nbsp&nbspSettings</a></li>
 
 				</ul>
 			</nav>
@@ -77,7 +79,7 @@ $page = end($url);
 			
 					foreach ($friendrequests as $request) {
 					
-						echo "<p>" . $request['friend_applicant'] .   " has send you a friend request"   . "<form><button type='submit' name='btnAccept_friendship' data-thema='be'>Accept</button><button type='submit' name='btnDecline_friendship' data-thema='be'>Decline</button></form></p><hr>";     
+						echo "<p>" . $request['friend_applicant'] .   " has send you a friend request"   . "<form action='' type='post'><button type='submit' name='btnAccept_friendship' data-thema='be'>Accept</button><button type='submit' name='btnDecline_friendship' data-thema='be'>Decline</button></form></p><hr>";     
 					}
 				
 				 ?>

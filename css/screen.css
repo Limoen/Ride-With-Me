@@ -487,3 +487,55 @@ div.usernameFeedback
 	font-size:1.2em;
 }
 
+
+#ride_reactions {
+margin-left:-25px;
+}	
+
+#comments {
+	background-color: #5bb75b;
+	color:white;
+	font-weight:bold;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom:10px;
+	margin-top:50px;
+}
+
+
+#listupdates {
+	width: auto;
+	height: auto;
+	margin-top: 30px;
+	padding-bottom: 20px;
+	font-family: arial;
+	font-size: 1em;
+	color: black;
+	list-style:none;
+	
+}
+
+#listupdates .user  {
+	padding: 3px;
+	padding-right: 10px;
+	color: #50494e;
+	font-weight: bold;
+	
+	margin-bottom: 20px;
+	background-color: red;
+	height: 20px;
+	text-align: right;
+	background-color: #e9e9e9;
+
+}
+
+#listupdates .description {
+	padding: 10px;
+	margin-bottom: 2px;
+	color: black;
+	
+	height: auto;
+	
+	text-align: justify;
+	line-height: 1.5em;
+}

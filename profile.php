@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+
 include_once ("classes/User.class.php");
 include_once ("classes/Friend.class.php");
 
@@ -73,14 +75,12 @@ if (isset($_POST["btnFriendRequest"])) {
 			
 				<ul>
 					<li><a id="you" href="profile.php?user_id=<?php echo $number ?>"><?php echo "Hello " . $username ?></a></li>
-				
-				
 					<li><a <?php if($page == "searchRides.php"){echo 'class="active"';}?> href="searchRides.php" >&nbsp Search ride</a></li>
 					<li><a <?php if($page == "createRide.php"){echo 'class="active"';}?> href="createRide.php">&nbsp Create ride</a></li>
 					<li><a <?php if($page == "yourRides.php"){echo 'class="active"';}?> href="yourRides.php">&nbsp Your rides</a></li>
-					<li><a <?php if($page == "settings.php"){echo 'class="active"';}?> href="settings.php"><img  src="img/Settings.png" img style="width: 15px;"/>&nbsp&nbspSettings</a></li>
-					<li><a <?php if($page == "notifications.php"){echo 'class="active"';}?> href="notifications.php">&nbsp Notifications</a></li>
 					<li><a <?php if($page == "yourFriends.php"){echo 'class="active"';}?> href="yourFriends.php">&nbsp Your Friends</a></li>
+					<li><a <?php if($page == "notifications.php"){echo 'class="active"';}?> href="notifications.php">&nbsp Notifications</a></li>
+					<li><a <?php if($page == "settings.php"){echo 'class="active"';}?> href="settings.php"><img  src="img/Settings.png" img style="width: 15px;"/>&nbsp&nbspSettings</a></li>
 
 				</ul>
 			</nav>
@@ -98,8 +98,7 @@ if (isset($_POST["btnFriendRequest"])) {
         <div><b><p id="slide2"><?php echo $details['bio']?></p></b></div>
 
     <div>
-    	<b><p id="slide3"><?php echo $details['street'] . ", " . $details['city'] . " (<span>" . $details['state'] . ", " . $details['country'] . ")</span>" ?></p><br/><p><span><?php echo $details['email'] . ", " . $details['phone'] ?></span></p></b>
-        <iframe src="https://maps.google.be/maps?f=q&amp;source=s_q&amp;hl=nl&amp;geocode=&amp;q=<?php echo $details['street'] . '+' . $details['city'] . '+' . $details['country'] ?>&amp;output=embed"></iframe>
+    	<b><p id="slide3"><?php echo $details['street'] . ", " . $details['city'] . " (<span>" . $details['state'] . ", " . $details['country'] . ")</span>" ?></p><br/><p><span><?php echo $details['email'] . ", " . $details['phone'] ?></span> <iframe src="https://maps.google.be/maps?f=q&amp;source=s_q&amp;hl=nl&amp;geocode=&amp;q=<?php echo $details['street'] . '+' . $details['city'] . '+' . $details['country'] ?>&amp;output=embed"></iframe></p></b>
     </div>
 	
   
@@ -111,7 +110,7 @@ if (isset($_POST["btnFriendRequest"])) {
 </div>
 
 <div id="profile_links">
-	<a href="ridesUser.php" ><img src="img/trips.png"/></a>
+	<a href="#" ><img src="img/trips.png"/></a>
 	<a href="friendsUser.php"><img src="img/friends.png"/></a>
 </div>
 <form class="form-horizontal" action="#"  method="post" >

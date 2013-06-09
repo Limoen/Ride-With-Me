@@ -74,7 +74,7 @@ $user = new User();
 		<?php } ?>
 		</div>
 		
-		<form class="form-horizontal" id="account-form" action=""  method="post" enctype="multipart/form-data" data-ajax="false">
+		<form class="form-horizontal" id="account-form" action="<?php echo $_SERVER['PHP_SELF']; ?>"  method="post" enctype="multipart/form-data" data-ajax="false">
 		<input type="text" name="username" id="username" placeholder="User name" />
 		<div class="usernameFeedback"><span></span></div>
 		

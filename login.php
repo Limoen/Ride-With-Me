@@ -1,6 +1,7 @@
 <?php
+include_once("classes/User.class.php");
 	session_start();
-	include_once("classes/User.class.php");
+	
 	$_SESSION["loggedin"] = false;
 	$feedback = "";
 	
@@ -41,7 +42,7 @@
         
         <section id="login">
             <h2>Want to take a ride? <span>Login</span></h2>
-            <form action="searchRides.php" method="post">
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 <input type="text" name="username" placeholder="username" />
                 <input type="password" name="password" placeholder="Password" />
                 <div id="feedback">

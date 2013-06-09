@@ -62,16 +62,7 @@ class Friend {
 					
 
 	}
-	/*
-		public function getFriendById($user_id)
-	{
-		$db = new Db();
-		$select = "SELECT * FROM friends WHERE friend_id=".$user_id.";";
-		
-		$result = $db->mysqli->query($select);
-		return $data=$result->fetch_assoc();
-	}
-	*/
+
 	public function getFriendById($id)
 {
 $db = new Db();

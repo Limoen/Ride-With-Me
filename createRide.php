@@ -1,9 +1,14 @@
 <?php
 include_once("classes/Ride.class.php");
 include_once("classes/User.class.php");
+session_start();
+if (!isset($_SESSION["username"])) {
+	header("Location: index.php");
+}
+
 $ride = new Ride();
 $user = new User();
-session_start();
+
 $currentPage = $_SERVER['SCRIPT_NAME'];
 $url = explode("/", $currentPage);
 $page = end($url);
@@ -15,7 +20,7 @@ $username = $_SESSION["username"];
 if (isset($_POST["btnCreateRide"])) {
 	try {
 		$ride -> Ride_Date = $_POST["Ride_Date"];
-		$ride -> Ride_Date = $_POST["Ride_Time"];
+		$ride -> Ride_Time = $_POST["Ride_Time"];
 		$ride -> Ride_Country = $_POST["Ride_Country"];
 		$ride -> Ride_State = $_POST["Ride_State"];
 		$ride -> Ride_City = $_POST["Ride_City"];
@@ -26,6 +31,7 @@ if (isset($_POST["btnCreateRide"])) {
 		$ride -> Ride_CityTo = $_POST["Ride_CityTo"];
 		$ride -> Ride_StreetTo = $_POST["Ride_StreetTo"];
 		$ride -> Ride_StreetNumberTo = $_POST["Ride_StreetNumberTo"];
+		$ride -> Ride_Description = $_POST["Ride_Description"];
 		$ride -> SaveRide();
 		$feedback = "Awesome, You just created a ride!";
 		//$bug->Bug_Status = "Unsolved";
@@ -67,8 +73,9 @@ if (isset($_POST["btnCreateRide"])) {
 					<li><a <?php if($page == "searchRides.php"){echo 'class="active"';}?> href="searchRides.php" >&nbsp Search ride</a></li>
 					<li><a <?php if($page == "createRide.php"){echo 'class="active"';}?> href="createRide.php">&nbsp Create ride</a></li>
 					<li><a <?php if($page == "yourRides.php"){echo 'class="active"';}?> href="yourRides.php">&nbsp Your rides</a></li>
-					<li><a <?php if($page == "settings.php"){echo 'class="active"';}?> href="settings.php"><img  src="img/Settings.png" img style="width: 15px;"/>&nbsp&nbspSettings</a></li>
+					<li><a <?php if($page == "yourFriends.php"){echo 'class="active"';}?> href="yourFriends.php">&nbsp Your Friends</a></li>
 					<li><a <?php if($page == "notifications.php"){echo 'class="active"';}?> href="notifications.php">&nbsp Notifications</a></li>
+					<li><a <?php if($page == "settings.php"){echo 'class="active"';}?> href="settings.php"><img  src="img/Settings.png" img style="width: 15px;"/>&nbsp&nbspSettings</a></li>
 
 				</ul>
 			</nav>
@@ -92,7 +99,8 @@ if (isset($_POST["btnCreateRide"])) {
 
 <!-- FROM -->
 						<legend>From:</legend>
-						<!--<label for="Ride_Country">Country</label>-->
+			
+						
 						<div class="controls">
 							<select name="Ride_Country">
                             	<option>Select Country</option>
@@ -102,7 +110,7 @@ if (isset($_POST["btnCreateRide"])) {
 							</select>
 						</div>
 						<div class="controls">
-						<!--	<label for="Ride_State">State</label>-->
+		
 							<select name="Ride_State">
                             	<option>Select State</option>
                                 <option>------------</option>
@@ -111,7 +119,7 @@ if (isset($_POST["btnCreateRide"])) {
 							</select>
 						</div>
 						<div class="controls">
-						<!--	<label for="Ride_City">City</label>-->
+					
 							<select name="Ride_City">
                             	<option>Select City</option>
                                 <option>-----------</option>
@@ -120,24 +128,16 @@ if (isset($_POST["btnCreateRide"])) {
 							</select>
 						</div>
 						<div class="controls">
-						<!--	<label for="Ride_Street">Street</label>
-							<select name="Ride_Street">
-								<option>Leeuwerikenlaan</option>
-								<option>Rue de Patat</option>
-							</select>-->
-                            <input type="text" placeholder="Street name"/>
+					
+                            <input type="text" name="Ride_Street" placeholder="Street name"/>
 						</div>
 						<div class="controls" >
-						<!--	<label for="Ride_StreetNumber">Nr</label>
-							<select name="Ride_StreetNumber">
-								<option>1</option>
-								<option>3</option>
-							</select>-->
-                            <input type="text" placeholder="House number"/>
+					
+                            <input type="text" name="Ride_StreetNumber" placeholder="House number"/>
 						</div>
 <!-- TO -->						
 						<legend>To:</legend>
-						<!--<label for="Ride_CountryTo">Country</label>-->
+					
 						<div class="controls">
 							<select name="Ride_CountryTo">
                             	<option>Select Country</option>
@@ -147,7 +147,7 @@ if (isset($_POST["btnCreateRide"])) {
 							</select>
 						</div>
 						<div class="controls">
-						<!--	<label for="Ride_StateTo">State</label>-->
+					
 							<select name="Ride_StateTo">
 								<option>Select State</option>
                                 <option>------------</option>
@@ -156,7 +156,7 @@ if (isset($_POST["btnCreateRide"])) {
 							</select>
 						</div>
 						<div class="controls">
-						<!--	<label for="Ride_CityTo">City</label>-->
+					
 							<select name="Ride_CityTo">
 								<option>Select City</option>
                                 <option>-----------</option>
@@ -165,21 +165,20 @@ if (isset($_POST["btnCreateRide"])) {
 							</select>
 						</div>
 						<div class="controls">
-						<!--	<label for="Ride_StreetTo">Street</label>
-							<select name="Ride_StreetTo">
-								<option>Leeuwerikenlaan</option>
-								<option>Rue de Patat</option>
-							</select>-->
-                            <input type="text" placeholder="Street name"/>
+					
+                            <input type="text" name="Ride_StreetTo" placeholder="Street name"/>
 						</div>
 						<div class="controls" >
-						<!--	<label for="Ride_StreetNumberTo">Nr</label>
-							<select name="Ride_StreetNumberTo">
-								<option>1</option>
-								<option>3</option>
-							</select>-->
-                            <input type="text" placeholder="House number"/>
+						
+                            <input type="text" name="Ride_StreetNumberTo" placeholder="House number"/>
 						</div>
+						<div class="controls" >
+							<label for="male">Male</label>
+							
+							<textarea name="Ride_Description"  placeholder="Is there something we have to know?" rows="4" cols="50"></textarea>
+						
+						</div>
+						
                     </fieldset>
                     <div>
                         <button type="submit"  name="btnCreateRide" data-theme="b" >
