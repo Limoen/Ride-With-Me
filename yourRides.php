@@ -29,9 +29,9 @@ $page = end($url);
 <body>
 <div data-role="page">
 	<div id="sidebar">
-	<div data-theme="a" data-role="header">    
+	<div data-theme="c" data-role="header">    
         <h3>
-            Ride with.me
+            Rides
        
         </h3>
         <header>
@@ -55,19 +55,15 @@ $page = end($url);
 	</div>
 </div>
 	<div data-role="content">
-		
-			<h1>Your Rides</h1>
-			<div>
-				
 				<?php
-			
-					foreach ($rides as $ride) {
+				foreach ($rides as $ride) {
 					
-						echo "<a  href='rides.php?ride_id=" . $ride['ride_id'] . "'>Read More <a/><p>" . $ride['ride_city'] . " (" . $ride['ride_country'] . ") - " . $ride['ride_cityto'] . " (" . $ride['ride_countryto'] . ")" . "<br>From: " . $ride['ride_street'] . " " . $ride['ride_streetnumber'] . "<br>To: " . $ride['ride_streetto'] . " " . $ride['ride_streetnumberto'] . "</p><hr>";     
+						echo "<div data-demo-html='true'><ul data-role='listview' data-inset='true' class='ui-listview ui-listview-inset ui-corner-all ui-shadow'><li data-corners='false' data-shadow='false' data-iconshadow='true' data-wrapperels='div' data-icon='arrow-r' data-iconpos='right' data-theme='c' class='ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c'><div class='ui-btn-inner ui-li'><div class='ui-btn-text'><a  href='rides.php?ride_id=" . $ride['ride_id'] . "' class='ui-link-inherit'><p class='ui-li-aside ui-li-desc'>on " . $ride['ride_date'] .  "<strong> at " . $ride['ride_time'] . "</strong></p><h2 class='ui-li-heading'>" . $ride['ride_city'] . " (" . $ride['ride_country'] . ") - " .  $ride['ride_cityto'] . " (" . $ride['ride_countryto'] . ")</h2><p class='ui-li-desc'><strong>From: </strong>" .  $ride['ride_street'] . " " . $ride['ride_streetnumber'] . "</p><p class='ui-li-desc'><strong>To: </strong>" .  $ride['ride_streetto'] . " " . $ride['ride_streetnumberto'] . "</p><p class='ul-li-desc'><img  src='img/steer.png'/>" . " " . $ride['username'] . "</p>
+						</a></div></div></li></ul></div>";     
 					}
 				
 				 ?>
-			</div>
+
 	</div>
 </div>
 

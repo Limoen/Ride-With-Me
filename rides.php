@@ -74,9 +74,9 @@ if(!empty($_POST["btnReact"]))
         <div data-role="page">
 
 			<div id="sidebar">
-	<div data-theme="a" data-role="header">    
+	<div data-theme="c" data-role="header">    
         <h3>
-            Ride with.me
+            <?php echo $details['ride_city'] . " - " . $details['ride_cityto']; ?>
        
         </h3>
         <header>

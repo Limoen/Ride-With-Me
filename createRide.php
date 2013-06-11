@@ -179,24 +179,24 @@ if (isset($_POST["btnCreateRide"])) {
 						
 						<div class="controls">
 					
-					<label for"Ride_Seats">Number of places (except your self)</label>
-							<input type="text" name="Ride_Seats" placeholder=""/>
+					<label for"Ride_Seats">Number of places</label>
+							<input type="text" name="Ride_Seats" placeholder="Available spots..."/>
 						</div>
                     </fieldset>
                     <div class="controls">
-                    					<?php if(!empty($feedback_success)): ?>
-<div id="feedback_success">
-<p><h1><?php echo $feedback_success ?></h1></p>
-</div>
-<?php endif; ?>
-</div>
-	  <div class="controls">
-<?php if(!empty($feedback_error)): ?>
-<div id="feedback_error">
-<p><h1><?php echo $feedback_error ?></h1></p>
-</div>
-<?php endif; ?>
-</div>
+                    	<?php if(!empty($feedback_success)): ?>
+						<div id="feedback_success">
+							<p><h1><?php echo $feedback_success ?></h1></p>
+						</div>
+						<?php endif; ?>
+					</div>
+					<div class="controls">
+						<?php if(!empty($feedback_error)): ?>
+						<div id="feedback_error">
+							<p><h1><?php echo $feedback_error ?></h1></p>
+						</div>
+						<?php endif; ?>
+					</div>
                     <div class="controls">
                         <button type="submit"  name="btnCreateRide" data-theme="b" >
                             Create ride

@@ -28,7 +28,7 @@ $friends=$friend->GetAllYourFriends($username);
 <body>
 <div data-role="page">
 	<div id="sidebar">
-	<div data-theme="a" data-role="header">    
+	<div data-theme="c" data-role="header">    
         <h3>
             Friends
        

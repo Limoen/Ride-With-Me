@@ -20,189 +20,172 @@ class Ride {
 		switch($p_sProperty) {
 			
 			case "Ride_Date" :
-					if(!empty($p_vValue))
-				{
-					$this -> m_dRide_Date = $p_vValue;
-				}
-				else
-				{
-					throw new Exception("Ow! Give a date for your ride please, please");
-					
-				}
-				break;
-			
-				case "Ride_Time" :
-					if(!empty($p_vValue))
-				{
-					$this -> m_tRide_Time = $p_vValue;
-				}
-				else
-				{
-					throw new Exception("Ow! Give a start hour for your ride please, please");
-					
-				}
-				
-				break;
-			
-		case "Ride_Country" :
-					if(!empty($p_vValue) && $p_vValue != "Select Country")
-				{
-					$this -> m_sRide_Country = $p_vValue;
-				}
-				else
-				{
-					throw new Exception("Ow! Select a country for your ride, please");
-					
-				}
-				break;
+			if(!empty($p_vValue))
+			{
+				$this -> m_dRide_Date = $p_vValue;
+			}
+			else
+			{
+				throw new Exception("Ow! Give a date for your ride please, please");
+			}
+			break;
+		
+			case "Ride_Time" :
+			if(!empty($p_vValue))
+			{
+				$this -> m_tRide_Time = $p_vValue;
+			}
+			else
+			{
+				throw new Exception("Ow! Give a start hour for your ride please, please");
+			}
+			break;
+		
+			case "Ride_Country" :
+				if(!empty($p_vValue) && $p_vValue != "Select Country")
+			{
+				$this -> m_sRide_Country = $p_vValue;
+			}
+			else
+			{
+				throw new Exception("Ow! Select a country for your ride, please");
+			}
+			break;
 				
 			case "Ride_State" :
-				if(!empty($p_vValue) && $p_vValue != "Select State")
-				{
-					$this -> m_sRide_State = $p_vValue;
-				}
-				else
-				{
-					throw new Exception("Ow! Select a state for your ride, please");
-					
-				}
-				break;
+			if(!empty($p_vValue) && $p_vValue != "Select State")
+			{
+				$this -> m_sRide_State = $p_vValue;
+			}
+			else
+			{
+				throw new Exception("Ow! Select a state for your ride, please");
+			}
+			break;
 				
 			case "Ride_City" :
-				if(!empty($p_vValue) && $p_vValue != "Select City")
-				{
-					$this -> m_sRide_City = $p_vValue;
-				}
-				else
-				{
-					throw new Exception("Ow! Select a city for your ride, please");
-					
-				}
-				
-				break;	
+			if(!empty($p_vValue) && $p_vValue != "Select City")
+			{
+				$this -> m_sRide_City = $p_vValue;
+			}
+			else
+			{
+				throw new Exception("Ow! Select a city for your ride, please");
+			}
+			break;	
 		
 			case "Ride_Street" :
-				if(!empty($p_vValue))
-				{
+			if(!empty($p_vValue))
+			{
+				if(is_numeric($p_vValue) == false) {
 					$this -> m_sRide_Street = $p_vValue;
+				} else {
+					throw new Exception("Ow! Give a correct departing street name, please. No numbers");
 				}
-				else if(empty($p_vValue)) {
-					throw new Exception("Ow! Give a streetname for departure please, please");
-				}
-				/*
-				else if(!is_string($p_vValue))
-				{throw new Exception("Ow! Give a correct name for your street please");}
-			*/
-				break;	
-				
+			}
+			else
+			{
+				throw new Exception("Could we get your departing street, please?");
+			}
+			break;
+			
 			case "Ride_StreetNumber" :
-				if(!empty($p_vValue))
-				{
+			if(!empty($p_vValue))
+			{
+				if(is_numeric($p_vValue) == true) {
 					$this -> m_iRide_StreetNumber = $p_vValue;
+				} else {
+					throw new Exception("Ow! That ain't no number, son!");
 				}
-					/*
-				else if(!is_numeric($p_vValue))
-				{throw new Exception("Ow! Give a correct number for your street please");}
-			*/
-					else
-				{
-					throw new Exception("Ow! You forgot a street number!");
-					
-				}
-				break;			
+			}
+			else
+			{
+				throw new Exception("Ow! You forgot a street number!");
+			}
+			break;			
+			
+			case "Ride_CountryTo" :
+				if(!empty($p_vValue) && $p_vValue != "Select Country")
+			{
+				$this -> m_sRide_CountryTo = $p_vValue;
+			}
+			else
+			{
+				throw new Exception("Ow! Select a country for your ride, please");
 				
-				case "Ride_CountryTo" :
-					if(!empty($p_vValue) && $p_vValue != "Select Country")
-				{
-					$this -> m_sRide_CountryTo = $p_vValue;
-				}
-				else
-				{
-					throw new Exception("Ow! Select a country for your ride, please");
-					
-				}
-				break;
+			}
+			break;
 				
 			case "Ride_StateTo" :
-				if(!empty($p_vValue) && $p_vValue != "Select State")
-				{
-					$this -> m_sRide_StateTo = $p_vValue;
-				}
-				else
-				{
-					throw new Exception("Ow! Select a state for your ride, please");
-					
-				}
-				break;
+			if(!empty($p_vValue) && $p_vValue != "Select State")
+			{
+				$this -> m_sRide_StateTo = $p_vValue;
+			}
+			else
+			{
+				throw new Exception("Ow! Select a state for your ride, please");
+			}
+			break;
 				
 			case "Ride_CityTo" :
-				if(!empty($p_vValue) && $p_vValue != "Select City")
-				{
-					$this -> m_sRide_CityTo = $p_vValue;
-				}
-				else
-				{
-					throw new Exception("Ow! Select a city for your ride, please");
-					
-				}
-				
-				break;	
+			if(!empty($p_vValue) && $p_vValue != "Select City")
+			{
+				$this -> m_sRide_CityTo = $p_vValue;
+			}
+			else
+			{
+				throw new Exception("Ow! Select a city for your ride, please");
+			}
+			break;	
+
 			case "Ride_StreetTo" :
-				if(!empty($p_vValue))
-				{
-					if(!is_string($p_vValue)) {
-						throw new Exception("Ow! Give a correct name for your street please");
-					} else {
-					$this -> m_sRide_StreetTo = $p_vValue;
-					}
+			if(!empty($p_vValue))
+			{
+				if(is_numeric($p_vValue) == false) {
+					$this -> m_sRide_Street = $p_vValue;
+				} else {
+					throw new Exception("Ow! Give a correct destination street name, please. No numbers");
 				}
-				else if(empty($p_vValue)) {
-					throw new Exception("Ow! Give a street name for departure please, please");
-				}
-				/*
-				else if(!is_string($p_vValue))
-				{throw new Exception("Ow! Give a correct name for your street please");}
-			*/
-				break;
+			}
+			else
+			{
+				throw new Exception("Could we get your destination street, please?");
+			}
+			break;
 				
 			case "Ride_StreetNumberTo" :
-				if(!empty($p_vValue))
-				{
-					$this -> m_iRide_StreetNumberTo = $p_vValue;
+			if(!empty($p_vValue))
+			{
+				if(is_numeric($p_vValue) == true) {
+					$this -> m_iRide_StreetNumber = $p_vValue;
+				} else {
+					throw new Exception("Ow! That ain't no destination number, son!");
 				}
-					/*
-				else if(!is_numeric($p_vValue))
-				{throw new Exception("Ow! Give a correct number for your street please");}
-			*/
-					else
-				{
-					throw new Exception("Ow! You forgot a street number!");
-					
-				}
-				break;			
+			}
+			else
+			{
+				throw new Exception("Ow! You forgot a destination street number!");
+			}
+			break;			
 				
-				case "Ride_Description" :
-					$this -> m_sRide_Description = $p_vValue;
-				
-				break;	
-				
-				case "Ride_Seats" :
-				if(!empty($p_vValue))
-				{
+			case "Ride_Description" :
+			$this -> m_sRide_Description = $p_vValue;
+			break;	
+			
+			case "Ride_Seats" :
+			if(!empty($p_vValue))
+			{
+				if(is_numeric($p_vValue) == true) {
 					$this -> m_iRide_Seats = $p_vValue;
+				} else {
+					throw new Exception("Ow! That ain't no destination number, son!");
 				}
-					/*
-				else if(!is_numeric($p_vValue))
-				{throw new Exception("Ow! Give a correct number for your street please");}
-			*/
-				else
-				{
-					throw new Exception("Ow! Give a number of seats, please");
-					
-				}
-				
-				break;	
-				
+			}
+			else
+			{
+				throw new Exception("How many people will you be taking along?");
+			}
+			break;	
 		}
 	}
 

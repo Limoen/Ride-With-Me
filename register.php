@@ -11,7 +11,15 @@ $user = new User();
 	{
 		try
 		{
-			
+			/*
+			if(isset($_POST['upload'])) {
+				$newName = time() . $_FILES['upload']['name'];
+				move_uploaded_file($_FILES['upload']['tmp_name'],
+		    	"uploads/" . $newName);
+			} else {
+				$newName = 'default.gif';
+			}
+			*/
 			$newName = time() . $_FILES['upload']['name'];
 			move_uploaded_file($_FILES['upload']['tmp_name'],
 	    	"uploads/" . $newName);
@@ -27,8 +35,17 @@ $user = new User();
 			$user->Bio = $_POST["bio"];
 			$user->City = $_POST["city"];
 			$user->Street = $_POST["street"];
-			$user->Register();
-			$feedback_success = "Awesome, You just signed up!"; 
+			
+			
+			$pass1 = $_POST['password'];
+			$pass2 = $_POST['check_password'];
+			if( $pass1 == $pass2) {
+				$user->Register();
+				$feedback_success = "Awesome, You just signed up!";
+			} else {
+				throw new Exception("Ow! Different passwords");
+			};
+			 
 		}
 		catch(Exception $e)
 		{
@@ -40,7 +57,7 @@ $user = new User();
 <head>
 <?php include_once("includes/head.php");?>
 
-	
+
 </head>
 
 <body>
@@ -84,7 +101,8 @@ $user = new User();
 		<input type="text" name="fullname" placeholder="Full name" />
 		<input type="tel" name="phone" id="textinput2" placeholder="Phone" value="" type="tel">
 		<input type="email" name="email" placeholder="Email" />
-		<input type="password" name="password" placeholder="Password" />
+		<input type="password" name="password" placeholder="Password"/>
+		<input type="password" name="check_password" placeholder="Repeat password"/>
 		<textarea  name="bio" id="bio" placeholder="Tell us more about your self." class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset"></textarea>
 		<h3>Living information</h3>
 		<div data-role="fieldcontain">
@@ -128,7 +146,7 @@ $user = new User();
             </select>
              <br />
               <br />
-            <input type="text" name="street" placeholder="Street" />
+            <input type="text" name="street" placeholder="Street and number" />
            
             <input type="file" name="upload" id="upload"  />
             
