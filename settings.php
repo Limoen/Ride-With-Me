@@ -20,9 +20,9 @@ $username = $_SESSION["username"];
 <body>
 <div data-role="page">
 <div id="sidebar">
-	<div data-theme="a" data-role="header">    
+	<div data-theme="c" data-role="header">    
         <h3>
-            Ride with.me
+            Settings
        
         </h3>
         <header>
@@ -31,14 +31,14 @@ $username = $_SESSION["username"];
 			<nav id="main-nav">
 			
 				<ul>
-					<li><a id="you" href="profile.php?user_id=<?php echo $number ?>"><?php echo "Hello " . $username ?></a></li>
-					<li><a <?php if($page == "searchRides.php"){echo 'class="active"';}?> href="searchRides.php" >&nbsp Search ride</a></li>
-					<li><a <?php if($page == "createRide.php"){echo 'class="active"';}?> href="createRide.php">&nbsp Create ride</a></li>
-					<li><a <?php if($page == "yourRides.php"){echo 'class="active"';}?> href="yourRides.php">&nbsp Your rides</a></li>
-					<li><a <?php if($page == "yourFriends.php"){echo 'class="active"';}?> href="yourFriends.php">&nbsp Your Friends</a></li>
-					<li><a <?php if($page == "notifications.php"){echo 'class="active"';}?> href="notifications.php">&nbsp Notifications</a></li>
-					<li><a <?php if($page == "settings.php"){echo 'class="active"';}?> href="settings.php"><img  src="img/Settings.png" img style="width: 15px;"/>&nbsp&nbspSettings</a></li>
-
+					<p><img style="height : 50px; padding: 20px;" src="img/logo_RWM.png"/></p>
+					<li id="bar_username"><a id="you" <?php if($page == "profile.php?user_id=" ){echo 'class="active"';}?> href="profile.php?user_id=<?php echo $number ?>"><?php echo "&nbsp; Hello " . $username ?></a></li>
+					<li><a <?php if($page == "searchRides.php"){echo 'class="active"';}?> href="searchRides.php" >&nbsp; Search Rides </a><span <?php if($page == "searchRides.php"){echo 'class="active"';} else{echo 'class="notactive"';}?> href="searchRides.php" >•</span></li>
+					<li><a <?php if($page == "createRide.php"){echo 'class="active"';}?> href="createRide.php" >&nbsp; Create Ride </a><span <?php if($page == "createRide.php"){echo 'class="active"';} else{echo 'class="notactive"';}?> href="createRide.php" >•</span></li>
+					<li><a <?php if($page == "yourRides.php"){echo 'class="active"';}?> href="yourRides.php" >&nbsp; Your Rides </a><span <?php if($page == "yourRides.php"){echo 'class="active"';} else{echo 'class="notactive"';}?> href="yourRides.php" >•</span></li>
+					<li><a <?php if($page == "yourFriends.php"){echo 'class="active"';}?> href="yourFriends.php" >&nbsp; Your Friends </a><span <?php if($page == "yourFriends.php"){echo 'class="active"';} else{echo 'class="notactive"';}?> href="notifications.php" >•</span></li>
+					<li><a <?php if($page == "notifications.php"){echo 'class="active"';}?> href="notifications.php" >&nbsp; Notifications </a><span <?php if($page == "notifications.php"){echo 'class="active"';} else{echo 'class="notactive"';}?> href="notifications.php" >•</span></li>
+					<li><a <?php if($page == "settings.php"){echo 'class="active"';}?> href="settings.php" >&nbsp; Settings </a><span <?php if($page == "settings.php"){echo 'class="active"';} else{echo 'class="notactive"';}?> href="settings.php" >•</span></li>
 				</ul>
 			</nav>
 		</header>
@@ -46,13 +46,10 @@ $username = $_SESSION["username"];
 </div>
 	<div data-role="content">
 		<form>
-			<br />
-			<h1>Settings</h1>
-			<p class="lead">
-    			Hello <span><?php echo $username . " "?></span><a href="logout.php">(Logout)</a>
-    		</p>
+		
+			
 		</form>
-		<a data-role="button" data-theme="e" href="logout.php">log out</a>
+		<a data-role="button" data-theme="e" href="logout.php">log out as <?php echo $username  ?></a>
 	</div>
 </div>
 

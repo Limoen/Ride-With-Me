@@ -3,6 +3,8 @@
 	session_start();
 	$_SESSION["loggedin"] = false;
 	$feedback = "";
+	$feedback_success = "";
+	$feedback_error = "";
 	
 $user = new User();
 	if(isset($_POST["btnSignup"]))
@@ -26,20 +28,21 @@ $user = new User();
 			$user->City = $_POST["city"];
 			$user->Street = $_POST["street"];
 			$user->Register();
-			$feedback = "Awesome, You just signed up!"; 
+			$feedback_success = "Awesome, You just signed up!"; 
 		}
 		catch(Exception $e)
 		{
-			$feedback = $e->getMessage();
+			$feedback_error = $e->getMessage();
 		}
 	}
 ?><!doctype html>
 <html lang="en">
 <head>
 <?php include_once("includes/head.php");?>
-	
+
 	
 </head>
+
 <body>
 
 	<header>
@@ -47,15 +50,11 @@ $user = new User();
 	</header>
 	<div data-role="page">
 
-			 <div data-theme="a" data-role="header">
-         <a data-role="button" data-rel="back" href="#page1" data-icon="arrow-l"
-        data-iconpos="left" class="ui-btn-left">
+			 <div data-theme="c" data-role="header">
+         <a data-role="button" href="index.php" class="ui-btn-left">
             back
         </a>
-        <a data-role="submit" href="#page1" data-icon="arrow-r" data-iconpos="right"
-        class="ui-btn-right" name="btnSignup">
-            Sign up
-        </a>
+       
         <h3>
             Create account
         </h3>
@@ -66,24 +65,28 @@ $user = new User();
 
 	<section id="signup">
 		<h2>New to Ride with.me? <span>Sign Up</span></h2>
-		<div id="feedback">
-		<?php if(empty($feedback)) { ?>
-		<h1></h1>
-		<?php } else { ?>
-		<h1><?php echo $feedback ?></h1>
-		<?php } ?>
-		</div>
+		<?php if(!empty($feedback_success)): ?>
+<div id="feedback_success">
+<p><h1><?php echo $feedback_success ?></h1></p>
+</div>
+<?php endif; ?>
+
+<?php if(!empty($feedback_error)): ?>
+<div id="feedback_error">
+<p><h1><?php echo $feedback_error ?></h1></p>
+</div>
+<?php endif; ?>
 		
 		<form class="form-horizontal" id="account-form" action="<?php echo $_SERVER['PHP_SELF']; ?>"  method="post" enctype="multipart/form-data" data-ajax="false">
 		<input type="text" name="username" id="username" placeholder="User name" />
 		<div class="usernameFeedback"><span></span></div>
 		
 		<input type="text" name="fullname" placeholder="Full name" />
-		<input name="phone" id="textinput2" placeholder="Phone" value="" type="tel">
+		<input type="tel" name="phone" id="textinput2" placeholder="Phone" value="" type="tel">
 		<input type="email" name="email" placeholder="Email" />
 		<input type="password" name="password" placeholder="Password" />
-		<textarea  name="bio" id="bio" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset"></textarea>
-		<h2>Living information</h2>
+		<textarea  name="bio" id="bio" placeholder="Tell us more about your self." class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset"></textarea>
+		<h3>Living information</h3>
 		<div data-role="fieldcontain">
 			
             <label for="selectmenu1">
@@ -146,9 +149,9 @@ $user = new User();
 					</div>
         </div>
 		
-		
+		 <p>Already a user? <a href="login.php" >Log in </a></p>
 	
-		<button type="submit" name="btnSignup" data-theme="b" >sign up for ridewith.me</button>
+		<button type="submit" id="btnSignup" name="btnSignup" data-theme="b" >sign up for ridewith.me</button>
 			
 		</form>
 	</section>

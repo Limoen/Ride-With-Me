@@ -9,17 +9,15 @@ class Friend {
 	public function __set($p_sProperty, $p_vValue) {
 		switch($p_sProperty) {
 			case "Friend_Applicant" :
-					$this -> m_sFriend_Applicant = $p_vValue;
-				
+				$this -> m_sFriend_Applicant = $p_vValue;				
 				break;
-			case "Friend_Recipient" :
-					$this -> m_sFriend_Recipient = $p_vValue;
 				
+			case "Friend_Recipient" :
+				$this -> m_sFriend_Recipient = $p_vValue;
 				break;
 				
 			case "Friend_Status" :
-					$this -> m_sFriend_Status = $p_vValue;
-				
+				$this -> m_sFriend_Status = $p_vValue;
 				break;	
 		
 			
@@ -29,16 +27,16 @@ class Friend {
 	public function __get($p_sProperty) {
 		switch($p_sProperty) {
 			case "Friend_Applicant" :
-				return $this -> m_sFriend_Applicant;
-				break;
+			return $this -> m_sFriend_Applicant;
+			break;
 
-				case "Friend_Recipient" :
-				return $this -> m_sFriend_Recipient;
-				break;
-				
-				case "Friend_Status" :
-				return $this -> m_sFriend_Status;
-				break;
+			case "Friend_Recipient" :
+			return $this -> m_sFriend_Recipient;
+			break;
+			
+			case "Friend_Status" :
+			return $this -> m_sFriend_Status;
+			break;
 		}
 
 	}
@@ -58,21 +56,21 @@ class Friend {
 						  		'" . $db -> mysqli -> real_escape_string($this -> Friend_Status) . "'
 						  )";
 
-						$db -> mysqli -> query($insert);
+		$db -> mysqli -> query($insert);
 					
 
 	}
 
 	public function getFriendById($id)
-{
-$db = new Db();
-$select = "SELECT * FROM friends WHERE user_id = '" . $id . "';";
-$result = $db->mysqli->query($select);
-while ($row=mysqli_fetch_assoc($result))
-{
-return $row['user_id'];
-}
-}
+	{
+		$db = new Db();
+		$select = "SELECT * FROM friends WHERE user_id = '" . $id . "';";
+		$result = $db->mysqli->query($select);
+		while ($row=mysqli_fetch_assoc($result))
+		{
+		return $row['user_id'];
+		}
+	}
 
 	public function GetAllFriendRequests($username) {
 		$db = new Db();

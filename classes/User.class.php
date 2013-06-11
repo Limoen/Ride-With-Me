@@ -27,7 +27,7 @@
 				}
 				else
 				{
-					throw new Exception("Ow! Give me your  name, please");
+					throw new Exception("Ow! Give me your name, please");
 					
 				}
 				break;

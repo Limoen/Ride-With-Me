@@ -3,7 +3,7 @@ include_once("classes/User.class.php");
 	session_start();
 	
 	$_SESSION["loggedin"] = false;
-	$feedback = "";
+	$feedback_error = "";
 	
 	$user = new User();
 		if(!empty($_POST["btnLogin"]))
@@ -17,7 +17,7 @@ include_once("classes/User.class.php");
 		}
 		catch(Exception $e)
 		{
-			$feedback = $e->getMessage();
+			$feedback_error = $e->getMessage();
 		}
 	}
 ?><!doctype html>
@@ -30,29 +30,28 @@ include_once("classes/User.class.php");
     </header>
     <div data-role="page">
     
-        <div data-theme="a" data-role="header">
-            <a data-role="button" data-rel="back" href="#page1" data-icon="arrow-l" data-iconpos="left" class="ui-btn-left">
-                back
+        <div data-theme="c" data-role="header">
+            <a data-role="button" href="index.php"  class="ui-btn-left">
+                Cancel
             </a>
-            <a data-role="submit" href="#page1" data-icon="arrow-r" data-iconpos="right" class="ui-btn-right" name="btnLogin">
-                Sign in
-            </a>
-            <h3>Login</h3>
+        
+            <h3>Log in</h3>
         </div>
         
         <section id="login">
             <h2>Want to take a ride? <span>Login</span></h2>
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                <input type="text" name="username" placeholder="username" />
-                <input type="password" name="password" placeholder="Password" />
-                <div id="feedback">
-					<?php if(empty($feedback)) { ?>
-                    <h1></h1>
-                    <?php } else { ?>
-                    <h1><?php echo $feedback ?></h1>
-                    <?php } ?>
-                </div>
-                <input type="submit" name="btnLogin" data-theme="b" value="Sign up for Ride with.me">
+            		<?php if(!empty($feedback_error)): ?>
+<div id="feedback_error">
+<p><h1><?php echo $feedback_error ?></h1></p>
+</div>
+<?php endif; ?>
+                <input id="username" type="text" name="username" placeholder="username" />
+                <input id="password" type="password" name="password" placeholder="password" />
+                
+                <p>Still no account? <a href="register.php" >Register</a></p>
+               
+                <input type="submit" name="btnLogin" data-theme="b" value="Sign up">
             </form>
         </section>
 	</div>

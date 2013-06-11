@@ -14,6 +14,7 @@ class Ride {
 		private $m_sRide_StreetTo;
 		private $m_iRide_StreetNumberTo;
 		private $m_sRide_Description;
+		private $m_iRide_Seats;
 
 	public function __set($p_sProperty, $p_vValue) {
 		switch($p_sProperty) {
@@ -43,17 +44,40 @@ class Ride {
 				
 				break;
 			
-			case "Ride_Country" :
+		case "Ride_Country" :
+					if(!empty($p_vValue) && $p_vValue != "Select Country")
+				{
 					$this -> m_sRide_Country = $p_vValue;
-				
+				}
+				else
+				{
+					throw new Exception("Ow! Select a country for your ride, please");
+					
+				}
 				break;
-			case "Ride_State" :
-					$this -> m_sRide_State = $p_vValue;
 				
+			case "Ride_State" :
+				if(!empty($p_vValue) && $p_vValue != "Select State")
+				{
+					$this -> m_sRide_State = $p_vValue;
+				}
+				else
+				{
+					throw new Exception("Ow! Select a state for your ride, please");
+					
+				}
 				break;
 				
 			case "Ride_City" :
+				if(!empty($p_vValue) && $p_vValue != "Select City")
+				{
 					$this -> m_sRide_City = $p_vValue;
+				}
+				else
+				{
+					throw new Exception("Ow! Select a city for your ride, please");
+					
+				}
 				
 				break;	
 		
@@ -62,12 +86,13 @@ class Ride {
 				{
 					$this -> m_sRide_Street = $p_vValue;
 				}
-				else
-				{
+				else if(empty($p_vValue)) {
 					throw new Exception("Ow! Give a streetname for departure please, please");
-					
 				}
-				
+				/*
+				else if(!is_string($p_vValue))
+				{throw new Exception("Ow! Give a correct name for your street please");}
+			*/
 				break;	
 				
 			case "Ride_StreetNumber" :
@@ -75,6 +100,10 @@ class Ride {
 				{
 					$this -> m_iRide_StreetNumber = $p_vValue;
 				}
+					/*
+				else if(!is_numeric($p_vValue))
+				{throw new Exception("Ow! Give a correct number for your street please");}
+			*/
 					else
 				{
 					throw new Exception("Ow! You forgot a street number!");
@@ -83,37 +112,68 @@ class Ride {
 				break;			
 				
 				case "Ride_CountryTo" :
-					$this -> m_sRide_CountryTo = $p_vValue;
-				
-				break;
-			case "Ride_StateTo" :
-					$this -> m_sRide_StateTo = $p_vValue;
-				
-				break;
-				
-			case "Ride_CityTo" :
-					$this -> m_sRide_CityTo = $p_vValue;
-				
-				break;	
-		
-			case "Ride_StreetTo" :
-				if(!empty($p_vValue))
+					if(!empty($p_vValue) && $p_vValue != "Select Country")
 				{
-					$this -> m_sRide_StreetTo = $p_vValue;
+					$this -> m_sRide_CountryTo = $p_vValue;
 				}
 				else
 				{
-					throw new Exception("Ow! Give a streetname for arrival please, please");
+					throw new Exception("Ow! Select a country for your ride, please");
+					
+				}
+				break;
+				
+			case "Ride_StateTo" :
+				if(!empty($p_vValue) && $p_vValue != "Select State")
+				{
+					$this -> m_sRide_StateTo = $p_vValue;
+				}
+				else
+				{
+					throw new Exception("Ow! Select a state for your ride, please");
+					
+				}
+				break;
+				
+			case "Ride_CityTo" :
+				if(!empty($p_vValue) && $p_vValue != "Select City")
+				{
+					$this -> m_sRide_CityTo = $p_vValue;
+				}
+				else
+				{
+					throw new Exception("Ow! Select a city for your ride, please");
 					
 				}
 				
 				break;	
+			case "Ride_StreetTo" :
+				if(!empty($p_vValue))
+				{
+					if(!is_string($p_vValue)) {
+						throw new Exception("Ow! Give a correct name for your street please");
+					} else {
+					$this -> m_sRide_StreetTo = $p_vValue;
+					}
+				}
+				else if(empty($p_vValue)) {
+					throw new Exception("Ow! Give a street name for departure please, please");
+				}
+				/*
+				else if(!is_string($p_vValue))
+				{throw new Exception("Ow! Give a correct name for your street please");}
+			*/
+				break;
 				
 			case "Ride_StreetNumberTo" :
 				if(!empty($p_vValue))
 				{
 					$this -> m_iRide_StreetNumberTo = $p_vValue;
 				}
+					/*
+				else if(!is_numeric($p_vValue))
+				{throw new Exception("Ow! Give a correct number for your street please");}
+			*/
 					else
 				{
 					throw new Exception("Ow! You forgot a street number!");
@@ -121,10 +181,28 @@ class Ride {
 				}
 				break;			
 				
-				case "Ride_DescriptionTo" :
-					$this -> m_sRide_DescriptionTo = $p_vValue;
+				case "Ride_Description" :
+					$this -> m_sRide_Description = $p_vValue;
 				
 				break;	
+				
+				case "Ride_Seats" :
+				if(!empty($p_vValue))
+				{
+					$this -> m_iRide_Seats = $p_vValue;
+				}
+					/*
+				else if(!is_numeric($p_vValue))
+				{throw new Exception("Ow! Give a correct number for your street please");}
+			*/
+				else
+				{
+					throw new Exception("Ow! Give a number of seats, please");
+					
+				}
+				
+				break;	
+				
 		}
 	}
 
@@ -181,6 +259,10 @@ class Ride {
 				case "Ride_Description" :
 				return $this -> m_sRide_Description;
 				break;
+				
+				case "Ride_Seats" :
+				return $this -> m_iRide_Seats;
+				break;
 	
 		}
 
@@ -204,6 +286,7 @@ class Ride {
 								ride_streetto,
 								ride_streetnumberto,
 								ride_description,
+								ride_seats,
 								username
 								
 					
@@ -221,6 +304,7 @@ class Ride {
 						  		'" . $db -> mysqli -> real_escape_string($this -> Ride_StreetTo) . "',
 						  		'" . $db -> mysqli -> real_escape_string($this -> Ride_StreetNumberTo) . "',
 						  		'" . $db -> mysqli -> real_escape_string($this -> Ride_Description) . "',
+						  		'" . $db -> mysqli -> real_escape_string($this -> Ride_Seats) . "',
 						  		'" . $_SESSION["username"] . "'
 						  )";
 

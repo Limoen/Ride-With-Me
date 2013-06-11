@@ -16,6 +16,9 @@ $username = $_SESSION["username"];
 
 	//$id = $_GET['user_id'];	
 		$number = $user->getUserByName($username);
+		
+		$feedback_success = "";
+	$feedback_error = "";
 
 if (isset($_POST["btnCreateRide"])) {
 	try {
@@ -25,19 +28,20 @@ if (isset($_POST["btnCreateRide"])) {
 		$ride -> Ride_State = $_POST["Ride_State"];
 		$ride -> Ride_City = $_POST["Ride_City"];
 		$ride -> Ride_Street = $_POST["Ride_Street"];
-		$ride -> Ride_StreetNumber = $_POST["Ride_StreetNumberTo"];
+		$ride -> Ride_StreetNumber = $_POST["Ride_StreetNumber"];
 		$ride -> Ride_CountryTo = $_POST["Ride_CountryTo"];
 		$ride -> Ride_StateTo = $_POST["Ride_StateTo"];
 		$ride -> Ride_CityTo = $_POST["Ride_CityTo"];
 		$ride -> Ride_StreetTo = $_POST["Ride_StreetTo"];
 		$ride -> Ride_StreetNumberTo = $_POST["Ride_StreetNumberTo"];
 		$ride -> Ride_Description = $_POST["Ride_Description"];
+		$ride -> Ride_Seats = $_POST["Ride_Seats"];
 		$ride -> SaveRide();
-		$feedback = "Awesome, You just created a ride!";
+		$feedback_success = "Awesome, You just created a ride!";
 		//$bug->Bug_Status = "Unsolved";
 	
 	} catch(Exception $e) {
-		$feedback = $e -> getMessage();
+		$feedback_error = $e -> getMessage();
 
 	}
 }
@@ -45,9 +49,10 @@ if (isset($_POST["btnCreateRide"])) {
 <!doctype html>
 <html lang="en">
 	<head>
-		<title>Create ride</title>
+	
         
 		<?php include_once ("includes/head.php"); ?>
+			<title>Create ride</title>
 		<link rel="stylesheet" type="text/css" href="http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.min.css" />
 		<script src="includes/mobile_menu.js"></script>
         <script src="http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.core.min.js"></script>
@@ -58,9 +63,9 @@ if (isset($_POST["btnCreateRide"])) {
 	<body>
 		<div data-role="page">
 		<div id="sidebar">
-	<div data-theme="a" data-role="header">    
+	<div data-theme="c" data-role="header">    
         <h3>
-            Ride with.me
+           Create a ride
        
         </h3>
         <header>
@@ -69,30 +74,23 @@ if (isset($_POST["btnCreateRide"])) {
 			<nav id="main-nav">
 			
 				<ul>
-					<li><a id="you" href="profile.php?user_id=<?php echo $number ?>"><?php echo "Hello " . $username ?></a></li>
-					<li><a <?php if($page == "searchRides.php"){echo 'class="active"';}?> href="searchRides.php" >&nbsp Search ride</a></li>
-					<li><a <?php if($page == "createRide.php"){echo 'class="active"';}?> href="createRide.php">&nbsp Create ride</a></li>
-					<li><a <?php if($page == "yourRides.php"){echo 'class="active"';}?> href="yourRides.php">&nbsp Your rides</a></li>
-					<li><a <?php if($page == "yourFriends.php"){echo 'class="active"';}?> href="yourFriends.php">&nbsp Your Friends</a></li>
-					<li><a <?php if($page == "notifications.php"){echo 'class="active"';}?> href="notifications.php">&nbsp Notifications</a></li>
-					<li><a <?php if($page == "settings.php"){echo 'class="active"';}?> href="settings.php"><img  src="img/Settings.png" img style="width: 15px;"/>&nbsp&nbspSettings</a></li>
-
+					<p><img style="height : 50px; padding: 20px;" src="img/logo_RWM.png"/></p>
+					<li id="bar_username"><a id="you" <?php if($page == "profile.php?user_id=" ){echo 'class="active"';}?> href="profile.php?user_id=<?php echo $number ?>"><?php echo "&nbsp; Hello " . $username ?></a></li>
+					<li><a <?php if($page == "searchRides.php"){echo 'class="active"';}?> href="searchRides.php" >&nbsp; Search Rides </a><span <?php if($page == "searchRides.php"){echo 'class="active"';} else{echo 'class="notactive"';}?> href="searchRides.php" >•</span></li>
+					<li><a <?php if($page == "createRide.php"){echo 'class="active"';}?> href="createRide.php" >&nbsp; Create Ride </a><span <?php if($page == "createRide.php"){echo 'class="active"';} else{echo 'class="notactive"';}?> href="createRide.php" >•</span></li>
+					<li><a <?php if($page == "yourRides.php"){echo 'class="active"';}?> href="yourRides.php?user_id=<?php echo $number ?>" >&nbsp; Your Rides </a><span <?php if($page == "yourRides.php"){echo 'class="active"';} else{echo 'class="notactive"';}?> href="yourRides.php" >•</span></li>
+					<li><a <?php if($page == "yourFriends.php"){echo 'class="active"';}?> href="yourFriends.php?user_id=<?php echo $number ?>" >&nbsp; Your Friends </a><span <?php if($page == "yourFriends.php"){echo 'class="active"';} else{echo 'class="notactive"';}?> href="notifications.php" >•</span></li>
+					<li><a <?php if($page == "notifications.php"){echo 'class="active"';}?> href="notifications.php" >&nbsp; Notifications </a><span <?php if($page == "notifications.php"){echo 'class="active"';} else{echo 'class="notactive"';}?> href="notifications.php" >•</span></li>
+					<li><a <?php if($page == "settings.php"){echo 'class="active"';}?> href="settings.php" >&nbsp; Settings </a><span <?php if($page == "settings.php"){echo 'class="active"';} else{echo 'class="notactive"';}?> href="settings.php" >•</span></li>
 				</ul>
+
 			</nav>
 		</header>
 	</div>
 </div>
 			<div data-role="content">
 				<form class="form-horizontal" action="<?php echo $_SERVER['PHP_SELF'];?>"  method="post" >
-					<?php if(empty($feedback)) {
-					?>
 
-					<?php } else {?>
-					<div>
-						<?php echo $feedback
-						?>
-					</div>
-					<?php }?>
                     	<legend>Ride date &amp; time:</legend>
                         <input type="date" name="Ride_Date" id="rideDate" data-role="datebox" data-options='{"mode":"flipbox", "useNewStyle":true}' placeholder="Ride Date">
                         <input type="date" name="Ride_Time" id="rideTime" data-role="datebox" data-options='{"mode": "timeflipbox", "overrideTimeFormat": 24, "useNewStyle":true}' placeholder="Ride Time">
@@ -104,7 +102,7 @@ if (isset($_POST["btnCreateRide"])) {
 						<div class="controls">
 							<select name="Ride_Country">
                             	<option>Select Country</option>
-                                <option>-------------</option>
+                             
 								<option>Belgium</option>
 								<option>France</option>
 							</select>
@@ -113,7 +111,7 @@ if (isset($_POST["btnCreateRide"])) {
 		
 							<select name="Ride_State">
                             	<option>Select State</option>
-                                <option>------------</option>
+                               
 								<option>East-Flanders</option>
 								<option>Provence</option>
 							</select>
@@ -122,7 +120,7 @@ if (isset($_POST["btnCreateRide"])) {
 					
 							<select name="Ride_City">
                             	<option>Select City</option>
-                                <option>-----------</option>
+                              
 								<option>Dendermonde</option>
 								<option>Lille</option>
 							</select>
@@ -141,7 +139,7 @@ if (isset($_POST["btnCreateRide"])) {
 						<div class="controls">
 							<select name="Ride_CountryTo">
                             	<option>Select Country</option>
-                                <option>-------------</option>
+                             
 								<option>Belgium</option>
 								<option>France</option>
 							</select>
@@ -150,7 +148,7 @@ if (isset($_POST["btnCreateRide"])) {
 					
 							<select name="Ride_StateTo">
 								<option>Select State</option>
-                                <option>------------</option>
+                              
 								<option>East-Flanders</option>
 								<option>Provence</option>
 							</select>
@@ -159,7 +157,7 @@ if (isset($_POST["btnCreateRide"])) {
 					
 							<select name="Ride_CityTo">
 								<option>Select City</option>
-                                <option>-----------</option>
+                             
 								<option>Dendermonde</option>
 								<option>Lille</option>
 							</select>
@@ -172,15 +170,34 @@ if (isset($_POST["btnCreateRide"])) {
 						
                             <input type="text" name="Ride_StreetNumberTo" placeholder="House number"/>
 						</div>
+						<legend>Other:</legend>
 						<div class="controls" >
-							<label for="male">Male</label>
-							
+						
 							<textarea name="Ride_Description"  placeholder="Is there something we have to know?" rows="4" cols="50"></textarea>
 						
 						</div>
 						
+						<div class="controls">
+					
+					<label for"Ride_Seats">Number of places (except your self)</label>
+							<input type="text" name="Ride_Seats" placeholder=""/>
+						</div>
                     </fieldset>
-                    <div>
+                    <div class="controls">
+                    					<?php if(!empty($feedback_success)): ?>
+<div id="feedback_success">
+<p><h1><?php echo $feedback_success ?></h1></p>
+</div>
+<?php endif; ?>
+</div>
+	  <div class="controls">
+<?php if(!empty($feedback_error)): ?>
+<div id="feedback_error">
+<p><h1><?php echo $feedback_error ?></h1></p>
+</div>
+<?php endif; ?>
+</div>
+                    <div class="controls">
                         <button type="submit"  name="btnCreateRide" data-theme="b" >
                             Create ride
                         </button></div>

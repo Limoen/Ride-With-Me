@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 09, 2013 at 09:22 PM
+-- Generation Time: Jun 10, 2013 at 11:02 AM
 -- Server version: 5.5.20
 -- PHP Version: 5.3.10
 
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `ride_id` int(11) NOT NULL,
   `comment_text` varchar(500) NOT NULL,
   PRIMARY KEY (`comment_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
 
 --
 -- Dumping data for table `comments`
@@ -53,12 +53,16 @@ CREATE TABLE IF NOT EXISTS `comments` (
 
 INSERT INTO `comments` (`comment_id`, `username`, `ride_id`, `comment_text`) VALUES
 (1, 'Beirepoot', 21, 'daazsqfzersfc'),
-(21, 'Beirepoot', 22, 'edeeded'),
-(22, 'Beirepoot', 22, 'edeeded'),
-(23, 'Beirepoot', 22, 'eeded'),
-(24, 'Beirepoot', 22, 'eeded'),
-(25, 'Beirepoot', 22, 'edde'),
-(26, 'Beirepoot', 22, 'edde');
+(37, 'Beirepoot', 22, 'hello dear'),
+(38, 'Beirepoot', 22, 'hello dear'),
+(39, 'Beirepoot', 22, 'e'),
+(40, 'Beirepoot', 22, 'e'),
+(41, 'Beirepoot', 22, 'e'),
+(42, 'Beirepoot', 22, 'e'),
+(43, 'Beirepoot', 22, 'd'),
+(44, 'Beirepoot', 22, 'd'),
+(45, 'Beirepoot', 45, 'e'),
+(46, 'Beirepoot', 45, 'e');
 
 -- --------------------------------------------------------
 
@@ -80,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `friends` (
 --
 
 INSERT INTO `friends` (`friend_id`, `friend_applicant`, `friend_recipient`, `friend_status`, `user_id`) VALUES
-(1, 'd', 'Beirepoot', 'Accepted', 43),
+(1, 'King', 'Beirepoot', 'Accepted', 52),
 (3, 'ee', 'Beirepoot', 'Pending', 0),
 (4, 'dfd', 'Beirepoot', 'Pending', 0);
 
@@ -180,34 +184,18 @@ CREATE TABLE IF NOT EXISTS `users` (
   `avatar` varchar(255) COLLATE utf8_bin NOT NULL,
   `bio` varchar(500) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=55 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=56 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `fullname`, `phone`, `country`, `state`, `city`, `street`, `avatar`, `bio`) VALUES
-(6, 'jef', 'jef@hotmail.com', '383283abbd8f26a231dcbfb3af85c710', '', '', '', '', '', '', '', ''),
-(33, 'ee', 'marnix.verhulst@gmail.com', 'c4e041275919253c63cde8f55b9b15e1', 'e', 'e', 'Belgium', 'Belgium', 'Belgium', 'e', '1369562448', ''),
-(34, 'dfd', 'marnix.verhulst@gmail.com', '56d01eb675ff3b3229ebc0ff2d3969fa', 'd', 'd', 'Belgium', 'Belgium', 'Belgium', 'd', '1369563270', ''),
-(35, 'e', 'marnix.verhulst@gmail.com', 'c4e041275919253c63cde8f55b9b15e1', 'e', 'e', 'Belgium', 'Belgium', 'Belgium', 'e', '1369563476', ''),
-(38, 'Verhulst', 'marnix.verhulst@gmail.com', 'b39c1d8e0b6cb2d2f67822e5d86a320d', 'Marnix', '0479776122', 'Belgium', 'East Flanders', 'Dendermonde', 'Leeuwerikenlaan 31', '136957084629b0ad94af6911e281cb22000a1f9a0a_7.jpg', ''),
-(39, 'fred', 'marnix.verhulst@gmail.com', '90cb57005eb88b26f4fe678806cd4552', 'v', 'v', 'Belgium', 'East Flanders', 'Dendermonde', 'ddd', '1369571778320369_2382304848000_288830264_n.jpg', ''),
-(40, 'Jef', 'jef@hotmail.com', 'b39c1d8e0b6cb2d2f67822e5d86a320d', 'Van Acker', '0489389030', 'Belgium', 'East Flanders', 'Dendermonde', 'dd', '1369579818669ec304cfe16dcf15bea690c558949d.jpg', ''),
-(41, 'ronny', 'marnix.verhulst@gmail.com', '56d01eb675ff3b3229ebc0ff2d3969fa', 'd', 'd', 'Belgium', 'East Flanders', 'Dendermonde', 'dd', '136958272729b0ad94af6911e281cb22000a1f9a0a_7.jpg', ''),
-(42, 'verhulstje', 'marnix.verhulst@gmail.com', '56d01eb675ff3b3229ebc0ff2d3969fa', 'van ackoleyende merde', 'd', 'Belgium', 'East Flanders', 'Dendermonde', 'ddd', '136958536729b0ad94af6911e281cb22000a1f9a0a_7.jpg', ''),
-(43, 'Verhulst', 'marnix.verhulst@gmail.com', 'c768ac5a7885b3fc998f1ca74ff8f286', 'Marnixke', '0479776122', 'Belgium', 'East Flanders', '9200 Dendermonde', 'Leeuwerikenlaan 31', '136967416029b0ad94af6911e281cb22000a1f9a0a_7.jpg', 'Hi! My name is Marnix! I''d look to meet new people who are nearby. With this app, it''s my chance!'),
-(44, 'mama', 'mama@hotmail.com', 'f8792837c40c20cd0935c76fc6035928', 'maka', 'mama', 'Belgium', 'East Flanders', 'Dendermonde', '', '1369824446320369_2382304848000_288830264_n.jpg', ''),
-(45, 'd', 'mama@hotmail.com', 'b0c60553c5bf0f6226acef220823eb8b', 'zeda', 'zead', 'Belgium', 'East Flanders', 'Dendermonde', '', '1369839951', ''),
-(46, 'de', 'marnix.verhulst@gmail.com', 'e26c65f44fe6c227125319123e3ce79c', 'ed', 'ed', 'Belgium', 'East Flanders', 'Dendermonde', 'c', '1369839972669ec304cfe16dcf15bea690c558949d.jpg', ''),
-(47, 'ed', 'marnix.verhulst@gmail.com', '56d01eb675ff3b3229ebc0ff2d3969fa', 'ed', 'ed', 'Belgium', 'East Flanders', 'Dendermonde', 'd', '1369840914320369_2382304848000_288830264_n.jpg', 'd'),
-(48, 'deezd', 'marnix.verhulst@gmail.com', '62c9a33bb5ad5980b94d6f3e5ec54141', 'e', 'edz', 'Select Country', 'Select State', 'Select City', 'ed', '1370456100', 'ed'),
-(49, 'sdfze', 'd@d.com', '56d01eb675ff3b3229ebc0ff2d3969fa', 'Marnix Verhulst', 'dd', 'Belgium', 'East Flanders', 'Dendermonde', 'ddd', '1370618930', 'd'),
-(50, 'beirepoot', 'd@d.com', '56d01eb675ff3b3229ebc0ff2d3969fa', 'Marnix Verhulst', 'dddd', 'Belgium', 'East Flanders', 'Dendermonde', 'd', '136967416029b0ad94af6911e281cb22000a1f9a0a_7.jpg', 'Hello i''m dickhead'),
-(51, 'e', 'edz@hot.com', 'c4e041275919253c63cde8f55b9b15e1', 'e', 'ee', 'Belgium', 'East Flanders', 'Dendermonde', 'e', '1370646687', 'e'),
+(6, 'Patat', 'jef@hotmail.com', '383283abbd8f26a231dcbfb3af85c710', 'Jef Vermeulen', '04839303939', 'Belgium', 'Vlaams-Brabant', 'Baal', 'Balenstraat', '', 'Ik ben Jef patat, bekend van Urbanus'),
 (52, 'King', 'marnix.verhulst@gmail.com', '2a57b44131ce9133bff0fb0bd6b30700', 'Marnix Verhulst', '0393939', 'Belgium', 'East Flanders', 'Dendermonde', 'King street', '1370646906', 'King'),
 (53, 'Beirepoot', 'marnix.verhulst@gmail.com', '2a893ad87ccae0892ec11fa054eac76c', 'Marnix Verhulst', 'ddddd', 'Belgium', 'East Flanders', 'Dendermonde', 'd', '1370683198', 'd'),
-(54, 'Seb', 'mijn@email.adres', '701c7f806bb5f5d35c39766c7f64e764', 'Seb Seb', 'Sebofoon', 'Belgium', 'East Flanders', 'Dendermonde', 'Sint Annalaan 38', '1370699827582086_10150760098344674_609939673_9303929_995040044_n.jpg', 'Ik ben Seb');
+(54, 'Seb', 'mijn@email.adres', '701c7f806bb5f5d35c39766c7f64e764', 'Seb Seb', 'Sebofoon', 'Belgium', 'East Flanders', 'Dendermonde', 'Sint Annalaan 38', '1370699827582086_10150760098344674_609939673_9303929_995040044_n.jpg', 'Ik ben Seb'),
+(55, 'm', 'm', 'b0c60553c5bf0f6226acef220823eb8b', 'm', 'm', 'Belgium', 'East Flanders', 'Dendermonde', 'm', '1370815317', 'm');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
