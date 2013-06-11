@@ -46,9 +46,9 @@ $page = end($url);
 <body>
 <div data-role="page">
 	<div id="sidebar">
-	<div data-theme="c" data-role="header">    
+	<div data-theme="b" data-role="header">    
         <h3>
-            Notifications
+            <?php echo $username ?>' Friend Requests
        
         </h3>
         <header>
@@ -57,7 +57,7 @@ $page = end($url);
 			<nav id="main-nav">
 			
 				<ul>
-					<p><img style="height : 50px; padding: 20px;" src="img/logo_RWM.png"/></p>
+					<p><img style="height : 50px; padding: 20px;" src="img/logo.png"/></p>
 					<li id="bar_username"><a id="you" <?php if($page == "profile.php?user_id=" ){echo 'class="active"';}?> href="profile.php?user_id=<?php echo $number ?>"><?php echo "&nbsp; Hello " . $username ?></a></li>
 					<li><a <?php if($page == "searchRides.php"){echo 'class="active"';}?> href="searchRides.php" >&nbsp; Search Rides </a><span <?php if($page == "searchRides.php"){echo 'class="active"';} else{echo 'class="notactive"';}?> href="searchRides.php" >•</span></li>
 					<li><a <?php if($page == "createRide.php"){echo 'class="active"';}?> href="createRide.php" >&nbsp; Create Ride </a><span <?php if($page == "createRide.php"){echo 'class="active"';} else{echo 'class="notactive"';}?> href="createRide.php" >•</span></li>
@@ -80,7 +80,7 @@ $page = end($url);
 			
 					foreach ($friendrequests as $request) {
 					
-						echo "<div><p><a href='profile.php?user_id=".$request['user_id']."'>" . $request['friend_applicant'].  "</a> has send you a friend request"   . "<form action='' type='post'><button type='submit' data-icon='check' data-inline='true' name='btnAccept_friendship' data-theme='b'>Accept</button><button type='submit' data-inline='true'  name='btnDecline_friendship' data-icon='delete' data-theme='e'>Decline</button></form></p></div>";     
+						echo "<div><p><a href='profile.php?user_id=".$request['friend_applicant_id']."'>" . $request['friend_applicant'].  "</a> has send you a friend request"   . "<form action='' type='post'><button type='submit' data-icon='check' data-inline='true' name='btnAccept_friendship' data-theme='b'>Accept</button><button type='submit' data-inline='true'  name='btnDecline_friendship' data-icon='delete' data-theme='e'>Decline</button></form></p></div>";     
 																																				
 					}
 				

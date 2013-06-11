@@ -67,7 +67,7 @@ $user = new User();
 	</header>
 	<div data-role="page">
 
-			 <div data-theme="c" data-role="header">
+			 <div data-theme="b" data-role="header">
          <a data-role="button" href="index.php" class="ui-btn-left">
             back
         </a>

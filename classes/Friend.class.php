@@ -4,22 +4,39 @@ class Friend {
 		private $m_sFriend_Applicant;
 		private $m_sFriend_Recipient;
 		private $m_sFriend_Status;
+		// NIEUW ->
+		private $m_sFriend_Recipient_id;
+		private $m_sFriend_Applicant_id;
+		// <- NIEUW
 
 
 	public function __set($p_sProperty, $p_vValue) {
 		switch($p_sProperty) {
 			case "Friend_Applicant" :
-				$this -> m_sFriend_Applicant = $p_vValue;				
-				break;
+					$this -> m_sFriend_Applicant = $p_vValue;
 				
+				break;
 			case "Friend_Recipient" :
-				$this -> m_sFriend_Recipient = $p_vValue;
+					$this -> m_sFriend_Recipient = $p_vValue;
+				
 				break;
 				
 			case "Friend_Status" :
-				$this -> m_sFriend_Status = $p_vValue;
+					$this -> m_sFriend_Status = $p_vValue;
+				
+				break;
+
+			//NIEUW ->
+			case "Friend_Recipient_id" :
+					$this -> m_sFriend_Recipient_id = $p_vValue;
+				
+				break;
+
+			case "Friend_Applicant_id" :
+					$this -> m_sFriend_Applicant_id = $p_vValue;
+				
 				break;	
-		
+			// <- NIEUW
 			
 		}
 	}
@@ -27,16 +44,26 @@ class Friend {
 	public function __get($p_sProperty) {
 		switch($p_sProperty) {
 			case "Friend_Applicant" :
-			return $this -> m_sFriend_Applicant;
-			break;
+				return $this -> m_sFriend_Applicant;
+				break;
 
-			case "Friend_Recipient" :
-			return $this -> m_sFriend_Recipient;
-			break;
-			
-			case "Friend_Status" :
-			return $this -> m_sFriend_Status;
-			break;
+				case "Friend_Recipient" :
+				return $this -> m_sFriend_Recipient;
+				break;
+				
+				case "Friend_Status" :
+				return $this -> m_sFriend_Status;
+				break;
+
+				// NIEUW ->
+				case "Friend_Recipient_id" :
+				return $this -> m_sFriend_Recipient_id;
+				break;
+
+				case "Friend_Applicant_id" :
+				return $this -> m_sFriend_Applicant_id;
+				break;
+				// <- NIEUW
 		}
 
 	}
@@ -45,31 +72,52 @@ class Friend {
 	public function Saverequest() {
 		
 		$db = new Db();
+		
 		$insert = "INSERT INTO friends (
 								friend_applicant,
 								friend_recipient,
-								friend_status
+								friend_status,
+								friend_recipient_id,
+								Friend_applicant_id
 						  ) VALUES (
 						  		
 						  		'" . $db -> mysqli -> real_escape_string($this -> Friend_Applicant) . "',
 						  		'" . $db -> mysqli -> real_escape_string($this -> Friend_Recipient) . "',
-						  		'" . $db -> mysqli -> real_escape_string($this -> Friend_Status) . "'
+						  		'" . $db -> mysqli -> real_escape_string($this -> Friend_Status) . "',
+						  		'" . $db -> mysqli -> real_escape_string($this -> Friend_Recipient_id) . "',
+						  		'" . $db -> mysqli -> real_escape_string($this -> Friend_Applicant_id) . "'
+						  		
 						  )";
 
-		$db -> mysqli -> query($insert);
+						$db -> mysqli -> query($insert);
 					
 
 	}
+	
+	public function getFriendById($user_id)
+{
+$db = new Db();
+$select = "SELECT * FROM friends WHERE friend_recipient_id = '" . $user_id . "' ";
+$result = $db->mysqli->query($select);
+while ($row=mysqli_fetch_assoc($result))
+{
+return $row['friend_recipient_id'];
+}
+}
 
-	public function getFriendById($id)
-	{
-		$db = new Db();
-		$select = "SELECT * FROM friends WHERE user_id = '" . $id . "';";
-		$result = $db->mysqli->query($select);
-		while ($row=mysqli_fetch_assoc($result))
-		{
-		return $row['user_id'];
+public function getFriendInfoById($user_id)
+{
+$db = new Db();
+$select = "SELECT * FROM friends WHERE friend_recipient_id = '" . $user_id . "' ";
+		
+		$result = $db -> mysqli -> query($select);
+	
+		$result_array=array();
+		while ($row = mysqli_fetch_array($result)) {
+             $result_array[]=$row;                                                                                          
 		}
+		return $result_array;
+		
 	}
 
 	public function GetAllFriendRequests($username) {
@@ -87,10 +135,12 @@ class Friend {
 		
 	}
 	
-	public function GetAllYourFriends($username) {
+		
+	
+	public function GetAllYourFriends($id) {
 		$db = new Db();
 	
-		$select = "SELECT * FROM friends WHERE friend_recipient = '" . $username . "' AND friend_status = 'Accepted' ORDER BY friend_id DESC";
+		$select = "SELECT * FROM friends WHERE (friend_recipient_id ='" . $id ."' OR friend_applicant_id = '" . $id . "') AND friend_status = 'Accepted' ORDER BY friend_id ASC";
 		
 		$result = $db -> mysqli -> query($select);
 	

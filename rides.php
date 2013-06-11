@@ -74,7 +74,7 @@ if(!empty($_POST["btnReact"]))
         <div data-role="page">
 
 			<div id="sidebar">
-	<div data-theme="c" data-role="header">    
+	<div data-theme="b" data-role="header">    
         <h3>
             <?php echo $details['ride_city'] . " - " . $details['ride_cityto']; ?>
        
@@ -85,7 +85,7 @@ if(!empty($_POST["btnReact"]))
 			<nav id="main-nav">
 			
 				<ul>
-					<p><img style="height : 50px; padding: 20px;" src="img/logo_RWM.png"/></p>
+					<p><img style="height : 50px; padding: 20px;" src="img/logo.png"/></p>
 					<li id="bar_username"><a id="you" <?php if($page == "profile.php?user_id=" ){echo 'class="active"';}?> href="profile.php?user_id=<?php echo $number ?>"><?php echo "&nbsp; Hello " . $username ?></a></li>
 					<li><a <?php if($page == "searchRides.php"){echo 'class="active"';}?> href="searchRides.php" >&nbsp; Search Rides </a><span <?php if($page == "searchRides.php"){echo 'class="active"';} else{echo 'class="notactive"';}?> href="searchRides.php" >•</span></li>
 					<li><a <?php if($page == "createRide.php"){echo 'class="active"';}?> href="createRide.php" >&nbsp; Create Ride </a><span <?php if($page == "createRide.php"){echo 'class="active"';} else{echo 'class="notactive"';}?> href="createRide.php" >•</span></li>
@@ -99,15 +99,19 @@ if(!empty($_POST["btnReact"]))
 		</header>
 	</div>
 
-    </div>
-    <div data-role="content">
+    </div>        <iframe id="iframe"  src="https://maps.google.be/maps?saddr=<?php echo $details['ride_street'] . "+" . $details['ride_streetnumber'] . "+" . $details['ride_city'] . "+" . $details['ride_country']?>&amp;daddr=<?php echo $details['ride_streetto'] . "+" . $details['ride_streetnumberto'] . "+" . $details['ride_cityto'] . "+" . $details['ride_countryto']?>&amp;output=embed" scrolling="no"></iframe>
 
-        <div><h3>FROM</h3><p><?php echo $details['ride_city'] . " (" . $details['ride_state'] . ", " . $details['ride_country']?>) </p><p><?php echo $details['ride_street'] . " " . $details['ride_streetnumber'] ?></p></div>
-		<div><h3>TO</h3><p><?php echo $details['ride_cityto'] . " (" . $details['ride_stateto'] . ", " . $details['ride_countryto']?>) </p><p><?php echo $details['ride_streetto'] . " " . $details['ride_streetnumberto'] ?></p></div>
-        <div><?php echo $details['ride_description'] ?></div>
-       	<br>
-        <iframe  src="https://maps.google.be/maps?saddr=<?php echo $details['ride_street'] . "+" . $details['ride_streetnumber'] . "+" . $details['ride_city'] . "+" . $details['ride_country']?>&amp;daddr=<?php echo $details['ride_streetto'] . "+" . $details['ride_streetnumberto'] . "+" . $details['ride_cityto'] . "+" . $details['ride_countryto']?>&amp;output=embed" scrolling="no"></iframe>
-		<img src="img/car.png"/><?php echo $details['username'] ?>
+    <div data-role="content">
+    	
+		<h4>FROM</h4>
+        <div class="ride_from"><p><span><?php echo $details['ride_city'] . " </span>(" . $details['ride_state'] . ", " . $details['ride_country']?>)</p><p><?php echo $details['ride_street'] . " " . $details['ride_streetnumber']   ?></p></div>
+		<h4>TO</h4>
+		<div class="ride_from"><p><span><?php echo $details['ride_cityto'] . " </span>(" . $details['ride_stateto'] . ", " . $details['ride_countryto']?>) </p><p><?php echo $details['ride_streetto'] . " " . $details['ride_streetnumberto'] ?></p></div>
+        <div class="ride_description" ><p><?php echo $details['ride_description'] . "<br/></p></div>" ?>
+       	<div><p><span class="driver"><img src="img/steer_w.png"/><?php echo " " .  $details['username'] ?> </span>
+       		<span class="driver"><img src="img/clock_w.png"/><?php echo  "on " . $details['ride_date'] . " at " . $details['ride_time'] ?> </span>
+       	</p></div>
+		
 <h4 id="comments">COMMENTS</h4>
 				<div id="ride_list">
 				<ul id="listupdates">
@@ -126,7 +130,7 @@ if(!empty($_POST["btnReact"]))
 				<div id="ride_react">
 					<form action="<?php echo $_SERVER['PHP_SELF'] . "?ride_id=" .$ride_id; ?>" method="post">
 					<textarea  name="comment" id="ride_message" placeholder="Give a reaction!"></textarea>
-					<button type="submit" data-theme="b" name="btnReact" id="btnReact" data-rid="<?php echo $ride_id ?>">React </button>
+					<button type="submit" data-theme="b"  data-inline="true" name="btnReact" id="btnReact" data-rid="<?php echo $ride_id ?>">React </button>
 					<button type="submit" data-theme="b" name="btnCheckIn" id="btnCheckIn">Get in the car! </button>
 
 					</p>

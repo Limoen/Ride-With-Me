@@ -8,20 +8,26 @@ if (!isset($_SESSION["username"])) {
 }
 $ride = new Ride();
 $user = new User();
-
+	$id = $_GET['user_id'];
 $currentPage = $_SERVER['SCRIPT_NAME'];
 $url = explode("/", $currentPage);
 $page = end($url);
 	//$id = $_GET['user_id'];	
 		$username = $_SESSION["username"];
+		$name = $user->getUserNameById($id);
 		//$friendnumber = $friend->getFriendByName(????);
 		$number = $user->getUserByName($username);
-		$rides=$ride->GetAllYourRides($username);
+		$rides=$ride->GetAllYourRides($id);
+		
+		
+		
+		
+		
 ?><!doctype html>
 <html lang="en">
 <head>
 	<?php include_once("includes/head.php");?>
-	<title><?php echo $username ?>' rides</title>
+	<title><?php echo  $name . "' rides"?></title>
 	<script>
 	<?php include_once("includes/mobile_menu.js");?>
 	</script>
@@ -29,9 +35,9 @@ $page = end($url);
 <body>
 <div data-role="page">
 	<div id="sidebar">
-	<div data-theme="c" data-role="header">    
+	<div data-theme="b" data-role="header">    
         <h3>
-            Rides
+           <?php echo  $name . "' rides"?>
        
         </h3>
         <header>
@@ -40,7 +46,7 @@ $page = end($url);
 			<nav id="main-nav">
 			
 				<ul>
-					<p><img style="height : 50px; padding: 20px;" src="img/logo_RWM.png"/></p>
+					<p><img style="height : 50px; padding: 20px;" src="img/logo.png"/></p>
 					<li id="bar_username"><a id="you" <?php if($page == "profile.php?user_id=" ){echo 'class="active"';}?> href="profile.php?user_id=<?php echo $number ?>"><?php echo "&nbsp; Hello " . $username ?></a></li>
 					<li><a <?php if($page == "searchRides.php"){echo 'class="active"';}?> href="searchRides.php" >&nbsp; Search Rides </a><span <?php if($page == "searchRides.php"){echo 'class="active"';} else{echo 'class="notactive"';}?> href="searchRides.php" >•</span></li>
 					<li><a <?php if($page == "createRide.php"){echo 'class="active"';}?> href="createRide.php" >&nbsp; Create Ride </a><span <?php if($page == "createRide.php"){echo 'class="active"';} else{echo 'class="notactive"';}?> href="createRide.php" >•</span></li>

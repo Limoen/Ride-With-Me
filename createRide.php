@@ -20,8 +20,13 @@ $username = $_SESSION["username"];
 		$feedback_success = "";
 	$feedback_error = "";
 
+
+
+
+
 if (isset($_POST["btnCreateRide"])) {
 	try {
+		$creator_id = $user->getUserByName($username);
 		$ride -> Ride_Date = $_POST["Ride_Date"];
 		$ride -> Ride_Time = $_POST["Ride_Time"];
 		$ride -> Ride_Country = $_POST["Ride_Country"];
@@ -36,6 +41,7 @@ if (isset($_POST["btnCreateRide"])) {
 		$ride -> Ride_StreetNumberTo = $_POST["Ride_StreetNumberTo"];
 		$ride -> Ride_Description = $_POST["Ride_Description"];
 		$ride -> Ride_Seats = $_POST["Ride_Seats"];
+		$ride->  Ride_Creator_Id = $creator_id;
 		$ride -> SaveRide();
 		$feedback_success = "Awesome, You just created a ride!";
 		//$bug->Bug_Status = "Unsolved";
@@ -63,7 +69,7 @@ if (isset($_POST["btnCreateRide"])) {
 	<body>
 		<div data-role="page">
 		<div id="sidebar">
-	<div data-theme="c" data-role="header">    
+	<div data-theme="b" data-role="header">    
         <h3>
            Create a ride
        
@@ -74,7 +80,7 @@ if (isset($_POST["btnCreateRide"])) {
 			<nav id="main-nav">
 			
 				<ul>
-					<p><img style="height : 50px; padding: 20px;" src="img/logo_RWM.png"/></p>
+					<p><img style="height : 50px; padding: 20px;" src="img/logo.png"/></p>
 					<li id="bar_username"><a id="you" <?php if($page == "profile.php?user_id=" ){echo 'class="active"';}?> href="profile.php?user_id=<?php echo $number ?>"><?php echo "&nbsp; Hello " . $username ?></a></li>
 					<li><a <?php if($page == "searchRides.php"){echo 'class="active"';}?> href="searchRides.php" >&nbsp; Search Rides </a><span <?php if($page == "searchRides.php"){echo 'class="active"';} else{echo 'class="notactive"';}?> href="searchRides.php" >•</span></li>
 					<li><a <?php if($page == "createRide.php"){echo 'class="active"';}?> href="createRide.php" >&nbsp; Create Ride </a><span <?php if($page == "createRide.php"){echo 'class="active"';} else{echo 'class="notactive"';}?> href="createRide.php" >•</span></li>

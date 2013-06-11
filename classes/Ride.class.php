@@ -15,6 +15,7 @@ class Ride {
 		private $m_iRide_StreetNumberTo;
 		private $m_sRide_Description;
 		private $m_iRide_Seats;
+		private $m_sRide_Creator_Id;
 
 	public function __set($p_sProperty, $p_vValue) {
 		switch($p_sProperty) {
@@ -186,6 +187,10 @@ class Ride {
 				throw new Exception("How many people will you be taking along?");
 			}
 			break;	
+			case "Ride_Creator_Id" :
+					$this -> m_sRide_Creator_Id = $p_vValue;
+				
+				break;	
 		}
 	}
 
@@ -246,6 +251,9 @@ class Ride {
 				case "Ride_Seats" :
 				return $this -> m_iRide_Seats;
 				break;
+				case "Ride_Creator_Id" :
+				return $this -> m_sRide_Creator_Id;
+				break;
 	
 		}
 
@@ -270,6 +278,7 @@ class Ride {
 								ride_streetnumberto,
 								ride_description,
 								ride_seats,
+								ride_creator_id,
 								username
 								
 					
@@ -288,6 +297,7 @@ class Ride {
 						  		'" . $db -> mysqli -> real_escape_string($this -> Ride_StreetNumberTo) . "',
 						  		'" . $db -> mysqli -> real_escape_string($this -> Ride_Description) . "',
 						  		'" . $db -> mysqli -> real_escape_string($this -> Ride_Seats) . "',
+						  		'" . $db -> mysqli -> real_escape_string($this -> Ride_Creator_Id) . "',
 						  		'" . $_SESSION["username"] . "'
 						  )";
 
@@ -330,11 +340,10 @@ return $row['ride_id'];
 		return $result_array;
 		
 	}*/
-	// Alle bugs tonen afh van username, die als variabele wordt megegeven (sessie['name']). Eerst in een array stoppen en deze dan uitlussen op de show_bugs page. 
-	public function GetAllYourRides($username) {
+	public function GetAllYourRides($name) {
 		$db = new Db();
 	
-		$select = "SELECT * FROM rides WHERE username = '" . $username . "' ORDER BY ride_id DESC";
+		$select = "SELECT * FROM rides WHERE ride_creator_id = '" . $name . "'";
 		
 		$result = $db -> mysqli -> query($select);
 	
@@ -345,6 +354,25 @@ return $row['ride_id'];
 		return $result_array;
 		
 	}
+	
+		public function GetAllYourFriends($id) {
+		$db = new Db();
+	
+		$select = "SELECT * FROM friends WHERE (friend_recipient_id ='" . $id ."' OR friend_applicant_id = '" . $id . "') AND friend_status = 'Accepted' ORDER BY friend_id ASC";
+		
+		$result = $db -> mysqli -> query($select);
+	
+		$result_array=array();
+		while ($row = mysqli_fetch_array($result)) {
+             $result_array[]=$row;                                                                                          
+		}
+		return $result_array;
+		
+	}
+	
+	
+	
+	
 	/*
 	public function GetAllRidesByUsername() {
 		$db = new Db();

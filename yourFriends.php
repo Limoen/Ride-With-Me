@@ -9,18 +9,19 @@ $currentPage = $_SERVER['SCRIPT_NAME'];
 $url = explode("/", $currentPage);
 $page = end($url);
 
-	
+	$id = $_GET['user_id'];
 $username = $_SESSION["username"];
 
+$name = $user->getUserNameById($id);
 $number = $user->getUserByName($username);
-//$id = $_GET['user_id'];
+
 //$number1 = $friend->getFriendById($id);
-$friends=$friend->GetAllYourFriends($username);
+$friends=$friend->GetAllYourFriends($id);
 ?><!doctype html>
 <html lang="en">
 <head>
 	<?php include_once("includes/head.php");?>
-	<title>friends</title>
+	<title> <?php echo  $name . "' friends"?></title>
 	<script>
 	<?php include_once("includes/mobile_menu.js");?>
 	</script>
@@ -28,9 +29,9 @@ $friends=$friend->GetAllYourFriends($username);
 <body>
 <div data-role="page">
 	<div id="sidebar">
-	<div data-theme="c" data-role="header">    
+	<div data-theme="b" data-role="header">    
         <h3>
-            Friends
+             <?php echo  $name . "' friends"?>
        
         </h3>
         <header>
@@ -39,7 +40,7 @@ $friends=$friend->GetAllYourFriends($username);
 			<nav id="main-nav">
 			
 				<ul>
-					<p><img style="height : 50px; padding: 20px;" src="img/logo_RWM.png"/></p>
+					<p><img style="height : 50px; padding: 20px;" src="img/logo.png"/></p>
 					<li id="bar_username"><a id="you" <?php if($page == "profile.php?user_id=" ){echo 'class="active"';}?> href="profile.php?user_id=<?php echo $number ?>"><?php echo "&nbsp; Hello " . $username ?></a></li>
 					<li><a <?php if($page == "searchRides.php"){echo 'class="active"';}?> href="searchRides.php" >&nbsp; Search Rides </a><span <?php if($page == "searchRides.php"){echo 'class="active"';} else{echo 'class="notactive"';}?> href="searchRides.php" >•</span></li>
 					<li><a <?php if($page == "createRide.php"){echo 'class="active"';}?> href="createRide.php" >&nbsp; Create Ride </a><span <?php if($page == "createRide.php"){echo 'class="active"';} else{echo 'class="notactive"';}?> href="createRide.php" >•</span></li>
@@ -60,7 +61,14 @@ $friends=$friend->GetAllYourFriends($username);
 				<?php
 
 				foreach ($friends as $friend) {
-					echo "<div><p><a href='profile.php?user_id=".$friend['user_id']."'>" . $friend['friend_applicant'] . " <a/></p></div>"; 
+					if($friend['friend_recipient'] == $name){
+					echo "<div><p><a href='profile.php?user_id=".$friend['friend_applicant_id']."'>" . $friend['friend_applicant'] . " <a/></p></div>"; 
+				}
+					else {
+						echo "<div><p><a href='profile.php?user_id=".$friend['friend_recipient_id']."'>" . $friend['friend_recipient'] . " <a/></p></div>"; 
+							
+						
+					}
 				}
 				
 				?>

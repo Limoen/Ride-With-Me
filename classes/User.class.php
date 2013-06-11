@@ -255,6 +255,17 @@ class User
 		return $data=$result->fetch_assoc();
 	}
 	
+	public function getUserNameById($id)
+	{
+		$db = new Db();
+		$select = "SELECT username FROM users WHERE user_id = '" . $id . "';";
+		$result = $db->mysqli->query($select);
+		while ($row=mysqli_fetch_assoc($result))
+		{
+		return $row['username'];
+		}
+	}
+	
 	public function getUserByName($username)
 	{
 		$db = new Db();
