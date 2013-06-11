@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 11, 2013 at 03:04 PM
+-- Generation Time: Jun 11, 2013 at 05:19 PM
 -- Server version: 5.5.20
 -- PHP Version: 5.3.10
 
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `ride_id` int(11) NOT NULL,
   `comment_text` varchar(500) NOT NULL,
   PRIMARY KEY (`comment_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
 
 --
 -- Dumping data for table `comments`
@@ -62,7 +62,9 @@ INSERT INTO `comments` (`comment_id`, `username`, `ride_id`, `comment_text`) VAL
 (43, 'Beirepoot', 22, 'd'),
 (44, 'Beirepoot', 22, 'd'),
 (45, 'Beirepoot', 45, 'e'),
-(46, 'Beirepoot', 45, 'e');
+(46, 'Beirepoot', 45, 'e'),
+(47, 'Beirepoot', 21, 'ed'),
+(48, 'Beirepoot', 21, 'ed');
 
 -- --------------------------------------------------------
 
@@ -141,7 +143,7 @@ INSERT INTO `rides` (`ride_id`, `ride_date`, `ride_time`, `username`, `ride_coun
 (18, '0000-00-00', '00:00:00', 'King', 'Belgium', 'East-Flanders', 'Dendermonde', 'Leeuwerikenlaan', 1, '', '', '', '', 0, '', 0, 0),
 (19, '0000-00-00', '00:00:00', 'King', 'Belgium', 'East-Flanders', 'Dendermonde', 'Leeuwerikenlaan', 87, 'Brazilië', 'Rio de Janeiro', 'Rio de Janeiro', 'Rua de Cuba Libre', 137, '', 0, 0),
 (20, '0000-00-00', '00:00:00', 'Beirepoot', 'Belgium', 'East-Flanders', 'Dendermonde', 'Leeuwerikenlaan', 1, 'Belgium', 'East-Flanders', 'Dendermonde', 'Leeuwerikenlaan', 1, '', 0, 0),
-(21, '0000-00-00', '00:00:00', 'Beirepoot', 'Belgium', 'East-Flanders', 'Dendermonde', 'Leeuwerikenlaan', 1, 'Belgium', 'East-Flanders', 'Dendermonde', 'Burgemeester Potiaulaan', 31, '', 0, 0),
+(21, '2013-04-09', '22:03:00', 'Beirepoot', 'Belgium', 'East-Flanders', 'Dendermonde', 'Leeuwerikenlaan', 31, 'Belgium', 'East-Flanders', 'Dendermonde', 'Burgemeester Potiaulaan', 32, 'Enjoy me and take a ride, we take a stap at Cristal Palace for 15 minutes and then we drive further to Dendermonde.', 3, 53),
 (22, '0000-00-00', '00:00:00', 'Beirepoot', '', '', 'Dendermonde', '', 0, 'Belgium', 'East-Flanders', 'Dendermonde', '', 0, '', 0, 0),
 (23, '0000-00-00', '00:00:00', 'Beirepoot', '', '', 'Dendermonde', '', 0, 'Belgium', 'East-Flanders', 'Lille', '', 0, '', 0, 0),
 (24, '0000-00-00', '00:00:00', 'Beirepoot', '', '', 'Lille', '', 0, 'France', 'East-Flanders', 'Dendermonde', '', 0, '', 0, 0),
