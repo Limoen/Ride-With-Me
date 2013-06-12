@@ -1,12 +1,14 @@
 <?php
 include_once("classes/User.class.php");
 include_once("classes/Friend.class.php");
+include_once("classes/Checkin.class.php");
 session_start();
 if (!isset($_SESSION["username"])) {
 	header("Location: index.php");
 }
 $friend = new Friend();
 $user = new User();
+$checkin = new Checkin();
 
 $currentPage = $_SERVER['SCRIPT_NAME'];
 $url = explode("/", $currentPage);
@@ -17,6 +19,9 @@ $page = end($url);
 	
 		$number = $user->getUserByName($username);
 		$friendrequests=$friend->GetAllFriendRequests($username);
+		$checkins=$checkin->GetAllRideNotifications($username);
+		//$checkinsAsApplicant=$checkin->GetAllRideNotificationsAsApplicant($username);
+		
 		/*$friendstatus=$friend->GetAllFriendRequests($username, $applicant);
 		
 		if (isset($_POST["btnAccept_friendship"])) {
@@ -48,7 +53,7 @@ $page = end($url);
 	<div id="sidebar">
 	<div data-theme="b" data-role="header">    
         <h3>
-            <?php echo $username ?>'s Notifications
+            <?php echo $username ?>' Friend Requests
        
         </h3>
         <header>
@@ -72,27 +77,26 @@ $page = end($url);
 	</div>
 </div>
 	<div data-role="content">
-			
-		<div id="friend_requests">
-			<h3><?php echo $username ?>'s friend requests</h3>
-			<?php
 		
-				foreach ($friendrequests as $request) {
+		
+			<div id="friend_requests">
 				
-					echo "<div><p><a href='profile.php?user_id=".$request['friend_applicant_id']."'>" . $request['friend_applicant'].  "</a> has send you a friend request"   . "<form action='' type='post'><button type='submit' data-icon='check' data-inline='true' name='btnAccept_friendship' data-theme='b'>Accept</button><button type='submit' data-inline='true'  name='btnDecline_friendship' data-icon='delete' data-theme='e'>Decline</button></form></p></div>";     
-																																			
-				}
+				<?php
 			
-			 ?>
-		</div>
-		<div id="rider_joined">
-			<h3><?php echo $username ?>'s ride joins</h3>
-			<?php
-			//	foreach() {
-			//		echo "<div><p><a href='profile.php?user_id=" . $['_id'] . "'>" . $['*username*'] . "</a> has joined your ride to <a>" . $['*stad bestemming*'] . ", " . $['*land bestemming*'] . "</a></p></div>";
-			//	}
-			?>
-		</div>
+					foreach ($friendrequests as $request) {
+					
+						echo "<div><p><a href='profile.php?user_id=".$request['friend_applicant_id']."'>" . $request['friend_applicant'].  "</a> has send you a friend request"   . "<form action='' type='post'><button type='submit' data-icon='check' data-inline='true' name='btnAccept_friendship' data-theme='b'>Accept</button><button type='submit' data-inline='true'  name='btnDecline_friendship' data-icon='delete' data-theme='e'>Decline</button></form></p></div>";     
+																																				
+					}
+					
+					foreach ($checkins as $checkin) {
+					
+						echo "<div><p><a href='profile.php?user_id=".$checkin['checkin_applicant_id']."'>" . $checkin['checkin_applicant'].  "</a> has joined <a href='rides.php?ride_id=" .$checkin['checkin_ride_id']."'>your ride</a> </p></div>";     
+																																				
+					}
+		
+				 ?>
+			</div>
 	</div>
 </div>
 

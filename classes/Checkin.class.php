@@ -75,7 +75,22 @@ class Checkin {
 
 		$db -> mysqli -> query($insert);
 	}
+
+
+	public function GetAllRideNotifications($username) {
+		$db = new Db();
+	
+		$select = "SELECT * FROM checkin WHERE checkin_driver = '" . $username . "'";
+		
+		$result = $db -> mysqli -> query($select);
+	
+		$result_array=array();
+		while ($row = mysqli_fetch_array($result)) {
+             $result_array[]=$row;                                                                                          
+		}
+		return $result_array;
+		
+	}
+
 }
-
-
 ?>
