@@ -49,9 +49,9 @@ include_once("classes/User.class.php");
                 <input id="username" type="text" name="username" placeholder="username" />
                 <input id="password" type="password" name="password" placeholder="password" />
                 
-                <p>Still no account? <a href="register.php" >Register</a></p>
+                <p>Not yet signed up? <a href="register.php" >Register</a></p>
                
-                <input type="submit" name="btnLogin" data-theme="b" value="Sign up">
+                <input type="submit" name="btnLogin" data-theme="b" value="Sign in">
             </form>
         </section>
 	</div>

@@ -48,7 +48,7 @@ $page = end($url);
 	<div id="sidebar">
 	<div data-theme="b" data-role="header">    
         <h3>
-            <?php echo $username ?>' Friend Requests
+            <?php echo $username ?>'s Notifications
        
         </h3>
         <header>
@@ -72,20 +72,27 @@ $page = end($url);
 	</div>
 </div>
 	<div data-role="content">
-		
-		
-			<div id="friend_requests">
-				
-				<?php
 			
-					foreach ($friendrequests as $request) {
-					
-						echo "<div><p><a href='profile.php?user_id=".$request['friend_applicant_id']."'>" . $request['friend_applicant'].  "</a> has send you a friend request"   . "<form action='' type='post'><button type='submit' data-icon='check' data-inline='true' name='btnAccept_friendship' data-theme='b'>Accept</button><button type='submit' data-inline='true'  name='btnDecline_friendship' data-icon='delete' data-theme='e'>Decline</button></form></p></div>";     
-																																				
-					}
+		<div id="friend_requests">
+			<h3><?php echo $username ?>'s friend requests</h3>
+			<?php
+		
+				foreach ($friendrequests as $request) {
 				
-				 ?>
-			</div>
+					echo "<div><p><a href='profile.php?user_id=".$request['friend_applicant_id']."'>" . $request['friend_applicant'].  "</a> has send you a friend request"   . "<form action='' type='post'><button type='submit' data-icon='check' data-inline='true' name='btnAccept_friendship' data-theme='b'>Accept</button><button type='submit' data-inline='true'  name='btnDecline_friendship' data-icon='delete' data-theme='e'>Decline</button></form></p></div>";     
+																																			
+				}
+			
+			 ?>
+		</div>
+		<div id="rider_joined">
+			<h3><?php echo $username ?>'s ride joins</h3>
+			<?php
+			//	foreach() {
+			//		echo "<div><p><a href='profile.php?user_id=" . $['_id'] . "'>" . $['*username*'] . "</a> has joined your ride to <a>" . $['*stad bestemming*'] . ", " . $['*land bestemming*'] . "</a></p></div>";
+			//	}
+			?>
+		</div>
 	</div>
 </div>
 

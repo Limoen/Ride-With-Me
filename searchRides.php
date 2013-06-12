@@ -33,6 +33,11 @@ $number = $user->getUserByName($username);
 	        new Ajax.Updater('show_results', 'search.php', { method: 'post', parameters: $('searchform').serialize() });
 	    }
 	</script>
+	<script>
+		function redirect(num) {
+			window.location="rides.php?ride_id=" + num;
+		}
+	</script>
 	
 </head>
 <body>
@@ -60,12 +65,22 @@ $number = $user->getUserByName($username);
 		</div>
 	</div>
 	<div data-role="content">
+
 		<h1>Search Rides</h1>
 		<form id="searchform" method="post" onsubmit="return false;">
 			<input id="searchbox" name="searchq" onkeyup="sendRequest()" type="text">
 		</form>
 		<div id="show_results"></div>
 	</div>
+<div data-role="footer" id="startfooter" data-theme="b">		
+	<div data-role="navbar" data-iconpos="top">
+		<ul>
+			<li><a href="profile.php?user_id=<?php echo $number ?>" ><img src="img/profile_sub.png" class="start_glyph"/><br/>Profile</a></li>
+			<li><a href="yourRides.php?user_id=<?php echo $number ?>" ><img src="img/trips_sub.png" class="start_glyph"/><br/>Trips</a></li>
+			<li><a href="yourFriends.php?user_id=<?php echo $number ?>" ><img src="img/friends_sub.png" class="start_glyph"/><br/>Friends</a></li>
+		</ul>
+	</div><!-- /navbar -->
+</div><!-- /footer -->
 </div>
 </body>
 </html>

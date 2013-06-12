@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-
 include_once ("classes/User.class.php");
 include_once ("classes/Friend.class.php");
 
@@ -14,9 +13,9 @@ if (!isset($_SESSION["username"])) {
 }
 
 $user = new User();
-// NIEUW ->
+
 $applicant = new User();
-// <- NIEUW
+
 $friend = new Friend();
 $id = $_GET['user_id'];
 
@@ -25,7 +24,9 @@ $detailsFriendship = $friend->getFriendById($id);
 
 $username = $_SESSION["username"];
 $number = $user->getUserByName($username);
-$friendstatus = $friend->getFriendInfoById($id);
+// NIEUW ->
+$friendstatus = $friend->getStatus($id);
+// <- NIEUW
 
 
 
@@ -33,27 +34,22 @@ if (isset($_POST["btnFriendRequest"])) {
 	try {
 		$username = $_SESSION['username'];
 		
-		// NIEUW ->
 		$buddy_id = $user->getUserByName($username);
 		
-		// <- NIEUW
 		$user_id = $_GET['user_id'];
 		$buddy = $user->GetUserById($user_id);
 		$buddyName = $buddy['username'];
 		$friend->Friend_Applicant = $username;
 		$friend->Friend_Recipient = $buddyName;
 		$friend->Friend_Status = "Pending";
-		// NIEUW ->
 		$friend->Friend_Recipient_id = $user_id;
 		$friend->Friend_Applicant_id = $buddy_id;
-		// <- NIEUW
 		$friend->Saverequest();
 		$feedback = "Awesome, You've sent a friend request!";
 	
 	
 	} catch(Exception $e) {
 		$feedback = $e -> getMessage();
-
 	}
 	
 }
@@ -76,6 +72,7 @@ if (isset($_POST["btnFriendRequest"])) {
 	</script>
 </head>
 <body>
+
 	<div data-role="page">
 		<div data-theme="b" data-role="header"><div id="sidebar">
 			<div data-theme="b" data-role="header">    
@@ -124,22 +121,32 @@ if (isset($_POST["btnFriendRequest"])) {
 		
 		
 		
-		
-		<?php if ($username != $details['username'] && $friendstatus = "Accepted"){ ?>
-			<button type="submit" name="" data-theme="a" id="btn" >delete as friend</button>
-		<?php }  else if ($username != $details['username'] && $friendstatus = "Pending"){ ?>
-			<button type="submit" name="" data-theme="d" id="btn" >request send</button>
-				<?php } else if ($username != $details['username'] )   {?>
-					<button type="submit"  name="btnFriendRequest" data-theme="b" >Add as friend</button>
+	
 
-<?php } else { ?>
-<a data-role="button" data-theme="c" href="settings.php">Settings</a><?php } ?>
-		
-		
+		<?php 
+			if ($username != $details['username'] && $friendstatus == "Accepted")
+			{
+				echo "<button type='submit' name='' data-theme='a' id='btn' >delete as friend</button>";
+			} 
+			else if ($username != $details['username'] && $friendstatus == "Pending")
+			{ 
+				echo "<button type='submit' name='' data-theme='d' id='btn' >request send</button>";
+			}
+			else if ($username != $details['username'] )   
+			{
+				echo "<button type='submit'  name='btnFriendRequest' data-theme='b' >Add as friend</button>";
+			} 
+			else 
+			{ 
+				echo "<a data-role='button' data-theme='c' href='settings.php'>Settings</a>";
+			} 
+		?>
+
+
 		<!-- code voor vervangen van friend request knop -->
 		
 	</form>
-	<?php echo $friendstatus ?>
+	<?php echo $friendstatus; ?>
 </div>
 </body>
 

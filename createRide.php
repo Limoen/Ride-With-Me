@@ -111,6 +111,11 @@ if (isset($_POST["btnCreateRide"])) {
                              
 								<option>Belgium</option>
 								<option>France</option>
+								<option>Netherlands</option>
+								<option>Germany</option>
+								<option>United Kingdom</option>
+								<option>Finland</option>
+								<option>Norway</option>
 							</select>
 						</div>
 						<div class="controls">
@@ -118,8 +123,13 @@ if (isset($_POST["btnCreateRide"])) {
 							<select name="Ride_State">
                             	<option>Select State</option>
                                
-								<option>East-Flanders</option>
+								<option>East Flanders</option>
+								<option>West Flanders</option>
+								<option>Flemish Brabant</option>
+								<option>Antwerp</option>
 								<option>Provence</option>
+								<option>London</option>
+								<option>Helsinki</option>
 							</select>
 						</div>
 						<div class="controls">
@@ -128,7 +138,12 @@ if (isset($_POST["btnCreateRide"])) {
                             	<option>Select City</option>
                               
 								<option>Dendermonde</option>
+								<option>Grimbergen</option>
+								<option>Keerbergen</option>
+								<option>Antwerpen</option>
 								<option>Lille</option>
+								<option>London</option>
+								<option>Helsinki</option>
 							</select>
 						</div>
 						<div class="controls">
@@ -148,24 +163,39 @@ if (isset($_POST["btnCreateRide"])) {
                              
 								<option>Belgium</option>
 								<option>France</option>
+								<option>Netherlands</option>
+								<option>Germany</option>
+								<option>United Kingdom</option>
+								<option>Finland</option>
+								<option>Norway</option>
 							</select>
 						</div>
 						<div class="controls">
 					
 							<select name="Ride_StateTo">
 								<option>Select State</option>
-                              
-								<option>East-Flanders</option>
+                               
+								<option>East Flanders</option>
+								<option>West Flanders</option>
+								<option>Flemish Brabant</option>
+								<option>Antwerp</option>
 								<option>Provence</option>
+								<option>London</option>
+								<option>Helsinki</option>
 							</select>
 						</div>
 						<div class="controls">
 					
 							<select name="Ride_CityTo">
 								<option>Select City</option>
-                             
+                              
 								<option>Dendermonde</option>
+								<option>Grimbergen</option>
+								<option>Keerbergen</option>
+								<option>Antwerpen</option>
 								<option>Lille</option>
+								<option>London</option>
+								<option>Helsinki</option>
 							</select>
 						</div>
 						<div class="controls">

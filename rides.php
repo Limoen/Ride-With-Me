@@ -1,25 +1,29 @@
 <?php
 session_start();
 
+$feedback = "";
+
 if (!isset($_SESSION["username"])) {
 	header("Location: index.php");
 }
 include_once ("classes/User.class.php");
 include_once ("classes/Ride.class.php");
 include_once ("classes/Comment.class.php");
+include_once ("classes/Checkin.class.php");
 
 
 $currentPage = $_SERVER['SCRIPT_NAME'];
 $url = explode("/", $currentPage);
 $page = end($url);
 if (!isset($_SESSION["username"])) {
-
 	header("Location: index.php");
 }
 
 $user = new User();
 $ride = new Ride();
 $comment = new Comment();
+$checkin = new Checkin();
+
 $ride_id = $_GET['ride_id'];
 $details = $ride->getRideById($ride_id);
 $rides=$comment->GetAllComments($ride_id);
@@ -30,24 +34,47 @@ $number = $ride->getRidesByName($username);
 
 
 
-
 if(!empty($_POST["btnReact"]))
+{
+	try
 	{
-		try
-		{
-			// Bij het reageren wordt de naam van diegene die ingelogd is meegegeven, net als de id van de bug waarop je reageert.
-			$username = $_SESSION['username'];
-			$ride_id = $_GET['ride_id'];
-			$comment->Comment = $_POST["comment"];
-			// parameters id en name meegeven met de saveComment om ze te gebruiken in de functie.
-			$comment->SaveComment($ride_id, $username);
-			
-		}
-		catch(Exception $e)
-		{
-			$feedback = $e->getMessage();
-		}
+		// Bij het reageren wordt de naam van diegene die ingelogd is meegegeven, net als de id van de bug waarop je reageert.
+		$username = $_SESSION['username'];
+		$ride_id = $_GET['ride_id'];
+		$comment->Comment = $_POST["comment"];
+		// parameters id en name meegeven met de saveComment om ze te gebruiken in de functie.
+		$comment->SaveComment($ride_id, $username);
+		
 	}
+	catch(Exception $e)
+	{
+		$feedback = $e->getMessage();
+	}
+}
+	
+		// ride 21 voor test
+if(isset($_POST['btnCheckIn'])) {
+	try 
+	{
+		$user_id = $details['ride_creator_id'];
+		$username = $_SESSION['username'];
+		$rider_id=$user->getUserByName($username);
+		$ride_id = $_GET['ride_id'];
+		$rider = $user->getUserById($user_id);
+		$riderName = $rider['username'];
+		$checkin->User_Applicant = $username;
+		$checkin->Driver = $riderName;
+		$checkin->Ride_id = $ride_id;
+		$checkin->User_Applicant_id = $rider_id;
+		$checkin->Driver_id = $user_id;
+		$checkin->Savecheckin();
+		$feedback = "Awesome, You've checked in!";
+	}
+	catch(Exception $e)
+	{
+		$feedback = $e->getMessage();
+	}
+}
 
 ?><!doctype html>
 <html lang="en">
@@ -102,6 +129,9 @@ if(!empty($_POST["btnReact"]))
     </div>        <iframe id="iframe"  src="https://maps.google.be/maps?saddr=<?php echo $details['ride_street'] . "+" . $details['ride_streetnumber'] . "+" . $details['ride_city'] . "+" . $details['ride_country']?>&amp;daddr=<?php echo $details['ride_streetto'] . "+" . $details['ride_streetnumberto'] . "+" . $details['ride_cityto'] . "+" . $details['ride_countryto']?>&amp;output=embed" scrolling="no"></iframe>
 
     <div data-role="content">
+    	<?php 
+    	echo $feedback;
+    	?>
     	
 		<h4>FROM</h4>
         <div class="ride_from"><p><span><?php echo $details['ride_city'] . " </span>(" . $details['ride_state'] . ", " . $details['ride_country']?>)</p><p><?php echo $details['ride_street'] . " " . $details['ride_streetnumber']   ?></p></div>
@@ -113,30 +143,30 @@ if(!empty($_POST["btnReact"]))
        	</p></div>
 		
 <h4 id="comments">COMMENTS</h4>
-				<div id="ride_list">
-				<ul id="listupdates">
-					
-				
-				<?php
+		<div id="ride_list">
+		<ul id="listupdates">
 			
-					foreach ($rides as $ride) {
-					
-						echo "<li class='description'>" . $ride['comment_text'] . "</li><li class='user'>" . $ride['username'] . "<li>";     
-					}
-				
-				 ?>
-				</ul>
-				</div>
-				<div id="ride_react">
-					<form action="<?php echo $_SERVER['PHP_SELF'] . "?ride_id=" .$ride_id; ?>" method="post">
-					<textarea  name="comment" id="ride_message" placeholder="Give a reaction!"></textarea>
-					<button type="submit" data-theme="b"  data-inline="true" name="btnReact" id="btnReact" data-rid="<?php echo $ride_id ?>">React </button>
-					<button type="submit" data-theme="b" name="btnCheckIn" id="btnCheckIn">Get in the car! </button>
+		<?php
+	
+			foreach ($rides as $ride) {
+			
+				echo "<li class='description'>" . $ride['comment_text'] . "</li><li class='user'>" . $ride['username'] . "<li>";     
+			}
+		
+		 ?>
+		</ul>
+		
+		</div>
+		<div id="ride_react">
+			<form action="<?php echo $_SERVER['PHP_SELF'] . "?ride_id=" .$ride_id; ?>" method="post">
+			<textarea  name="comment" id="ride_message" placeholder="Give a reaction!"></textarea>
+			<button type="submit" data-theme="b"  data-inline="true" name="btnReact" id="btnReact" data-rid="<?php echo $ride_id ?>">React </button>
+			<button type="submit" data-theme="b" name="btnCheckIn" id="btnCheckIn">Get in the car! </button>
 
-					</p>
+			</p>
 
-					</form>
-				</div>
+			</form>
+		</div>
 	</div>
 
 	</body>

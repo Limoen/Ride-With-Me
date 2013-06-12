@@ -143,7 +143,7 @@ class Ride {
 			if(!empty($p_vValue))
 			{
 				if(is_numeric($p_vValue) == false) {
-					$this -> m_sRide_Street = $p_vValue;
+					$this -> m_sRide_StreetTo = $p_vValue;
 				} else {
 					throw new Exception("Ow! Give a correct destination street name, please. No numbers");
 				}
@@ -158,7 +158,7 @@ class Ride {
 			if(!empty($p_vValue))
 			{
 				if(is_numeric($p_vValue) == true) {
-					$this -> m_iRide_StreetNumber = $p_vValue;
+					$this -> m_iRide_StreetNumberTo = $p_vValue;
 				} else {
 					throw new Exception("Ow! That ain't no destination number, son!");
 				}

@@ -4,10 +4,10 @@ class Friend {
 		private $m_sFriend_Applicant;
 		private $m_sFriend_Recipient;
 		private $m_sFriend_Status;
-		// NIEUW ->
+
 		private $m_sFriend_Recipient_id;
 		private $m_sFriend_Applicant_id;
-		// <- NIEUW
+		
 
 
 	public function __set($p_sProperty, $p_vValue) {
@@ -26,7 +26,7 @@ class Friend {
 				
 				break;
 
-			//NIEUW ->
+			
 			case "Friend_Recipient_id" :
 					$this -> m_sFriend_Recipient_id = $p_vValue;
 				
@@ -36,7 +36,7 @@ class Friend {
 					$this -> m_sFriend_Applicant_id = $p_vValue;
 				
 				break;	
-			// <- NIEUW
+			
 			
 		}
 	}
@@ -55,7 +55,7 @@ class Friend {
 				return $this -> m_sFriend_Status;
 				break;
 
-				// NIEUW ->
+				
 				case "Friend_Recipient_id" :
 				return $this -> m_sFriend_Recipient_id;
 				break;
@@ -63,7 +63,7 @@ class Friend {
 				case "Friend_Applicant_id" :
 				return $this -> m_sFriend_Applicant_id;
 				break;
-				// <- NIEUW
+				
 		}
 
 	}
@@ -105,16 +105,40 @@ return $row['friend_recipient_id'];
 }
 }
 
-public function getFriendInfoById($user_id)
-{
-$db = new Db();
-$select = "SELECT * FROM friends WHERE friend_recipient_id = '" . $user_id . "' ";
+
+
+
+
+//NIEUW ->
+		public function getStatus($user_id)
+		{
+		$db = new Db();
+		$select = "SELECT * FROM friends WHERE friend_recipient_id = '" . $user_id . "' OR friend_applicant_id = '" . $user_id . "' ";
+		
+		$result = $db -> mysqli -> query($select);
+	
+		//$result_array = array();
+		while ($row = mysqli_fetch_assoc($result)) {
+            //$result_array[]=$row;    
+            $resultStatus = $row['friend_status'];                                                                                          
+		}
+		if(empty($resultStatus)){$resultStatus = "";}
+		return $resultStatus;
+		
+	}
+// <- NIEUW
+
+
+	public function getFriendInfoById($user_id)
+	{
+		$db = new Db();
+		$select = "SELECT * FROM friends WHERE friend_recipient_id = '" . $user_id . "' ";
 		
 		$result = $db -> mysqli -> query($select);
 	
 		$result_array=array();
 		while ($row = mysqli_fetch_array($result)) {
-             $result_array[]=$row;                                                                                          
+            $result_array[]=$row;                                                                                            
 		}
 		return $result_array;
 		
@@ -152,7 +176,13 @@ $select = "SELECT * FROM friends WHERE friend_recipient_id = '" . $user_id . "' 
 		
 	}
 	
-	
+	public function DeleteFriend($user_id, $buddy_id) {
+		$db = new Db();
+		
+		$select = "DELETE * FROM friends WHERE friend_recipient_id ='" . $buddy_id ."' AND friend_applicant_id = '" . $user_id . "'";
+		
+		$result = $db -> mysqli -> query($select);
+	}
 	
 	/*
 	public function AcceptFriendRequest($username, $applicant){

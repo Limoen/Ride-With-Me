@@ -169,7 +169,7 @@ $user = new User();
 		
 		 <p>Already a user? <a href="login.php" >Log in </a></p>
 	
-		<button type="submit" id="btnSignup" name="btnSignup" data-theme="b" >sign up for ridewith.me</button>
+		<button type="submit" id="btnSignup" name="btnSignup" data-theme="b" >Sign up for ridewith.me</button>
 			
 		</form>
 	</section>
